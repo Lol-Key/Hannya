@@ -1,14 +1,14 @@
 package Project.Controllers;
 
-import java.io.IOException;
 
 import Project.App;
 import javafx.fxml.FXML;
 
-public class SecondaryController {
+import java.io.IOException;
 
+public class DescriptionController {
     @FXML
-    private void switchToPrimary() throws IOException {
+    private void onSwitch() throws IOException {
         App.setRoot("main");
     }
 }
