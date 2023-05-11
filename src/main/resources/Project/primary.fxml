@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="289.0" prefWidth="520.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Hannya.PrimaryController">
+<VBox alignment="CENTER" prefHeight="289.0" prefWidth="520.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.PrimaryController">
    <children>
       <Label text="Second view" />
       <Button fx:id="primaryButton" onAction="#switchToSecondary" text="First view" />
