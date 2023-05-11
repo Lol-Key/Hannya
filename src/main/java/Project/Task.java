@@ -1,3 +1,5 @@
+package Project;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +11,7 @@ public class Task
 	String path;
 	Task(String path)
 	{ 
-		if(path.charAt(path.length()-1)=='/')path.concat("/");
+		if(path.charAt(path.length()-1)=='/')path=path.concat("/");
 		this.path=path;
 
 		runCommie("g++ ".concat(path).concat("wzor.cpp -o").concat(path).concat("wzor"), false);
