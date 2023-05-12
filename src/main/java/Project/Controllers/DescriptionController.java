@@ -9,6 +9,6 @@ import java.io.IOException;
 public class DescriptionController {
     @FXML
     private void onSwitch() throws IOException {
-        App.setRoot("main");
+        App.setRoot("task");
     }
 }
