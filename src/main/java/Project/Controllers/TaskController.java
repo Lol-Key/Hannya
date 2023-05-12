@@ -34,7 +34,7 @@ public class TaskController {
             return;
         }
         //System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-        Task task = new Task(absolutePath+"tasks"+fileSeparator+"a"+fileSeparator);
+        Task task = new Task(absolutePath+"tasks"+fileSeparator+"tree-permutations"+fileSeparator);
         if(task.Test(code)){
             res = "OK";
             resultLabel.setText(res);

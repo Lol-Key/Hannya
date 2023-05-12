@@ -17,8 +17,8 @@ public class Task
 		if(path.charAt(path.length()-1)!='/')path=path.concat("/");
 		this.path=path;
 
-		runCommie("g++ ".concat(path).concat("wzor.cpp -o").concat(path).concat("wzor"), false);
-		runCommie("chmod ".concat("a+x ").concat(path).concat("wzor"), false);
+		runCommie("g++ ".concat(path).concat("model_solution.cpp -o").concat(path).concat("model_solution"), false);
+		runCommie("chmod ".concat("a+x ").concat(path).concat("model_solution"), false);
 	}	
 
 	//TODO compile exception, testcase exception
@@ -71,14 +71,14 @@ public class Task
 		try 
 		{ 
 
-			System.out.println( "running :".concat(path.concat("wzor")) );
-			Process process = Runtime.getRuntime().exec( path.concat("wzor") );
+			System.out.println( "running :".concat(path.concat("model_solution")) );
+			Process process = Runtime.getRuntime().exec( path.concat("model_solution") );
 
 			process.getOutputStream().write(Files.readString(Paths.get(path.concat(name) )).getBytes());
 			process.getOutputStream().close();
 			process.waitFor();
 			
-			Files.write(Paths.get(path.concat("wzor.out")),process.getInputStream().readNBytes(1000));
+			Files.write(Paths.get(path.concat("model_solution.out")),process.getInputStream().readNBytes(1000));
 			process.getInputStream().close();
 		}
 		catch ( Exception ioe ){ System.out.println( ioe.getMessage() ); }
@@ -87,7 +87,7 @@ public class Task
 		try 
 		{
 			System.out.println("diffin");
-			Process process = Runtime.getRuntime().exec("diff -b ".concat(path).concat("wzor.out ").concat(path).concat("solve.out"));
+			Process process = Runtime.getRuntime().exec("diff -b ".concat(path).concat("model_solution.out ").concat(path).concat("solve.out"));
 			process.waitFor();
 			
 			BufferedReader logStream=new BufferedReader(new InputStreamReader(process.getInputStream()));
