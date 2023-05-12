@@ -8,7 +8,7 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.DescriptionController">
    <center>
-      <Label text="Tresc zadania" BorderPane.alignment="CENTER" />
+      <Label text="Tresc zadania: Wypisz Hello world" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <AnchorPane prefHeight="23.0" prefWidth="600.0" BorderPane.alignment="CENTER">
