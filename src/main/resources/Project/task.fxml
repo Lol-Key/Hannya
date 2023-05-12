@@ -33,12 +33,12 @@
                <children>
                   <TextArea fx:id="areaText" prefHeight="480.0" prefWidth="600.0">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="25.0" />
                      </font></TextArea>
                   <VBox prefHeight="156.0" prefWidth="523.0" style="-fx-background-color: #1E1E1E;">
                      <children>
                         <Label prefHeight="24.0" prefWidth="123.0" text="Udaje terminal:" textFill="WHITE" />
-                        <Label prefHeight="94.0" prefWidth="572.0" text="Label" textFill="#f8f7f7">
+                        <Label fx:id="resultLabel" prefHeight="32.0" prefWidth="427.0" textFill="WHITE">
                            <font>
                               <Font size="21.0" />
                            </font>
@@ -51,9 +51,10 @@
             <AnchorPane prefHeight="48.0" prefWidth="760.0" style="-fx-background-color: #282828;" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="716.0" layoutY="11.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="21.0" stylesheets="@css/button.css" textFill="WHITE" />
-                  <Button layoutX="693.0" layoutY="11.0" mnemonicParsing="false" text="Task" />
-                  <Button layoutX="605.0" layoutY="11.0" mnemonicParsing="false" text="Compile" />
-                  <Button layoutX="532.0" layoutY="11.0" mnemonicParsing="false" text="Save" />
+                  <Button layoutX="681.0" layoutY="11.0" mnemonicParsing="false" onAction="#onSwitch" text="Task" />
+                  <Button layoutX="605.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCompile" text="Compile" />
+                  <Button layoutX="548.0" layoutY="11.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+
                </children>
             </AnchorPane>
          </top>
