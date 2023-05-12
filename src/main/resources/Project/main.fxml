@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.MainController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
+    <center>
+        <TextArea fx:id="areaText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <AnchorPane prefHeight="14.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar prefHeight="27.0" prefWidth="513.0">
 
-          <Menu text="File" >
-              <MenuItem onAction="#onCompile" text="Compile" />
-              <MenuItem onAction="#onSwitch" text="Switch" />
-          </Menu>
-      </MenuBar>
-   </top>
-   <center>
-      <TextArea fx:id="areaText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
+                    <Menu text="Options">
+                        <MenuItem onAction="#onSave" text="Save" />
+                        <MenuItem onAction="#onHelp" text="Help" />
+                    </Menu>
+                </MenuBar>
+                <Button layoutX="457.0" layoutY="1.0" mnemonicParsing="false" onAction="#onCompile" prefHeight="26.0" prefWidth="82.0" text="Compile" />
+                <Button layoutX="539.0" layoutY="1.0" mnemonicParsing="false" onAction="#onSwitch" text="Switch" />
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="88.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="resultLabel" layoutY="-1.0" prefHeight="104.0" prefWidth="600.0" />
+            </children></AnchorPane>
+    </bottom>
 </BorderPane>

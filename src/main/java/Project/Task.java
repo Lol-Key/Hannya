@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class Task
 {
 	String path;
-	Task(String path)
+	public Task(String path)
 	{ 
 		if(path.charAt(path.length()-1)!='/')path=path.concat("/");
 		this.path=path;
@@ -117,22 +117,22 @@ public class Task
 		return true;
 	}
 
-	public static void main(String[] args)
-	{
-		
-		Task currentTask=new Task("./task0"); ///should be ${resourcepath}/${taskpath}
-		String code="#include<bits/stdc++.h>\n\nusing namespace std;\n\nint32_t main(){ cout<<\">.<Hello World\"; }\n";
-		
-		if(currentTask.Test(code))System.out.println("OK");
-		else System.out.println("ERR");
-
-
-		currentTask=new Task("./task1"); ///should be ${resourcepath}/${taskpath}
-		code="#include<bits/stdc++.h>\n\nusing namespace std;\n\nint32_t main(){ string s;\n cin>>s;\n cout<<\"wow\";\n}\n";
-		
-		if(currentTask.Test(code))System.out.println("OK");
-		else System.out.println("ERR");
-
-	}
+//	public static void main(String[] args)
+//	{
+//
+//		Task currentTask=new Task("./task0"); ///should be ${resourcepath}/${taskpath}
+//		String code="#include<bits/stdc++.h>\n\nusing namespace std;\n\nint32_t main(){ cout<<\">.<Hello World\"; }\n";
+//
+//		if(currentTask.Test(code))System.out.println("OK");
+//		else System.out.println("ERR");
+//
+//
+//		currentTask=new Task("./task1"); ///should be ${resourcepath}/${taskpath}
+//		code="#include<bits/stdc++.h>\n\nusing namespace std;\n\nint32_t main(){ string s;\n cin>>s;\n cout<<\"wow\";\n}\n";
+//
+//		if(currentTask.Test(code))System.out.println("OK");
+//		else System.out.println("ERR");
+//
+//	}
 
 }
