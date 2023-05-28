@@ -1,0 +1,7 @@
+-> rozciagnaie sie text area podejrznie nie wiem jak to zrobic
+-> dodanie okna od terminala
+-> zmiana kolorow
+-> podswitlanie gornych przyciskow
+-> current task ma dziedziedziczyc po task
+-> nie da sie ruszac ramka gdy jest drugi screen
+-> in i out wypis
