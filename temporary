@@ -23,23 +23,9 @@
 [INFO] --- javafx-maven-plugin:0.0.6:run (default-cli) @ Hannya ---
 [INFO] Toolchain in javafx-maven-plugin null
 [WARNING] Module name not found in <mainClass>. Module name will be assumed from module-info.java
- Compile attempt 
-obtaining: /home/flubbed/Desktop/git/Hannya/res/tasks/
-running: g++ -o user_solution user_solution.cpp -w
-running: g++ -o model_solution model_solution.cpp -w
-Diffin
- Compile attempt 
-obtaining: /home/flubbed/Desktop/git/Hannya/res/tasks/
-running: g++ -o user_solution user_solution.cpp -w
-running: g++ -o model_solution model_solution.cpp -w
-Diffin
- Compile attempt 
-obtaining: /home/flubbed/Desktop/git/Hannya/res/tasks/
-running: g++ -o user_solution user_solution.cpp -w
-running: g++ -o model_solution model_solution.cpp -w
-Diffin
- Compile attempt 
-obtaining: /home/flubbed/Desktop/git/Hannya/res/tasks/
-running: g++ -o user_solution user_solution.cpp -w
-running: g++ -o model_solution model_solution.cpp -w
-Diffin
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.730 s
+[INFO] Finished at: 2023-06-07T21:00:38+02:00
+[INFO] ------------------------------------------------------------------------

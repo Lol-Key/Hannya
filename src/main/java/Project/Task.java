@@ -6,6 +6,7 @@ import java.util.Random;
 public class Task
 {
 	static Random gen = new Random( 2137 );
+	static Task current = new Task();
 	File dir=null;
 
 	Task(){ }
