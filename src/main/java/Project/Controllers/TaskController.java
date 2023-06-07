@@ -2,6 +2,8 @@ package Project.Controllers;
 
 import Project.App;
 import Project.Task;
+import Project.TaskTester;
+import Project.GppFactory.GppCompilationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,17 +27,29 @@ public class TaskController {
 
     @FXML
     private void onCompile(){
-        //System.out.println("tak");
+        System.out.println(" Trying to compile ");
         String code = areaText.getText();
         String res;
-        if(code ==  null || code.equals("")){
+        
+
+        res = "PIKPIK HAHA";
+        resultLabel.setText(res);
+
+	if(code ==  null || code.equals("")){
             res = "ERROR";
             resultLabel.setText(res);
             return;
         }
+
+	Task veryRandom = Task.randomTask();
+	try {
+		if(TaskTester.runAll(veryRandom, code))res = "OK";
+		else res = "ERROR";
+		return;
+	}catch ( GppCompilationException CME ){ res="ERROR"; }
         //System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-        Task task = new Task(absolutePath+"tasks"+fileSeparator+"tree-permutations"+fileSeparator);
-        if(task.Test(code)){
+ //       Task task = new Task(absolutePath+"tasks"+fileSeparator+"tree-permutations"+fileSeparator);
+   /*     if(task.Test(code)){
             res = "OK";
             resultLabel.setText(res);
             System.out.println("ok");
@@ -43,7 +57,7 @@ public class TaskController {
             res = "ERROR";
             resultLabel.setText(res);
             System.out.println("error");
-        }
+        }*/
     }
     @FXML
     private void onSwitch() throws IOException {

@@ -1,7 +1,8 @@
 package Project.Controllers;
-import Project.CurrentTask;
 import Project.App;
 import Project.Task;
+import Project.TaskTester;
+import Project.GppFactory.GppCompilationException;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static Project.App.currentTask;
 
 public class ViewCodeController implements Initializable {
     @FXML
@@ -45,17 +44,33 @@ public class ViewCodeController implements Initializable {
 
     @FXML
     private void onCompile(){
-        //System.out.println("tak");
+        System.out.println(" Compile attempt ");
         String code = mainTextArea.getText();
         String res;
         if(code ==  null || code.equals("")){
-            res = "ERROR";
+            res = " PIK PIK HAHAHA ";
             resultLabel.setText(res);
             return;
         }
+
+	Task veryrandom = Task.randomTask();
+
+	try {
+		if(TaskTester.runAll(veryrandom, code)) res = "OK";
+		else res = "ANS";
+		resultLabel.setText(res);
+		return;
+	}catch ( GppCompilationException cme)
+	{
+			System.out.println("CME");
+
+            		res = " CME ";
+            		resultLabel.setText(res);
+            		return;
+	}
         //System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-        Task task = new Task(absolutePath+"tasks"+fileSeparator+currentTask.nameOfTheTask+fileSeparator);
-        if(task.Test(code)){
+       // Task task = new Task(absolutePath+"tasks"+fileSeparator+currentTask.nameOfTheTask+fileSeparator);
+       /* if(task.Test(code)){
             res = "OK";
            resultLabel.setText(res);
             System.out.println("ok");
@@ -63,7 +78,7 @@ public class ViewCodeController implements Initializable {
             res = "ERROR";
             resultLabel.setText(res);
             System.out.println("error");
-        }
+        }*/
     }
     @FXML
     private void onSwitch() throws IOException {
@@ -71,7 +86,7 @@ public class ViewCodeController implements Initializable {
     }
 
     public void changeCurrentTask(ActionEvent event){
-        currentTask.generateRandom();
+       // currentTask.generateRandom();
     }
     public void onSave() {
         //TO DO zmien gdzie zapisuje plik  nie do folderu task tylko jakises submit

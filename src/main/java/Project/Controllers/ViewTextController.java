@@ -1,6 +1,5 @@
 package Project.Controllers;
 import Project.App;
-import Project.CurrentTask;
 import Project.Task;
 import Project.TasksList;
 import javafx.animation.TranslateTransition;
@@ -47,9 +46,9 @@ public class ViewTextController implements Initializable {
     private Label out;
 
     public void changeCurrentTask(ActionEvent event){
-        currentTask.generateRandom();
-        taskNumber.setText(currentTask.nameOfTheTask);
-        taskText.setText(currentTask.textFromTask);
+        //currentTask.generateRandom();
+        //taskNumber.setText(currentTask.nameOfTheTask);
+        //taskText.setText(currentTask.textFromTask);
 //        in.setText(currentTask.inPath);
 //        out.setText(currentTask.outPath);
     }

@@ -1,5 +1,4 @@
 package Project;
-import Project.TasksList;
 
 
 import javafx.application.Application;
@@ -19,10 +18,7 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    public static TasksList tasksList;
     public static int sizeOfTasks;
-
-    public static CurrentTask currentTask;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -58,10 +54,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        tasksList = new TasksList();
-        tasksList.takeNamesOfFiles();
-        sizeOfTasks = tasksList.listOfTasks.size();
-        currentTask = new CurrentTask();
+
         //TO DO ustaw staly pierwszy task wysiwetlany
         launch();
     }
