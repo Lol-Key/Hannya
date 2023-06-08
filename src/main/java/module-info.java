@@ -3,6 +3,7 @@ module org.Hannya {
     requires javafx.fxml;
     requires org.fxmisc.flowless;
     requires org.fxmisc.richtext;
+    requires com.jfoenix;
 
     opens Project to javafx.fxml;
     exports Project;

@@ -27,7 +27,7 @@ public class GppFactory
 		}
 	}
 
-	static void compile(File path, String name) throws GppCompilationException
+	public static void compile(File path, String name) throws GppCompilationException
 	{
 		if( name.endsWith(".cpp") )name = name.substring(0, name.length()-4);
 		

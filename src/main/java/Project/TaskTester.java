@@ -8,6 +8,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TaskTester 
@@ -23,9 +24,8 @@ public class TaskTester
 		Process testerProcess = tester.start();
 		testerProcess.waitFor(1500, TimeUnit.MILLISECONDS);
 		}
-		catch( IOException e ) {}
-		catch( InterruptedException e ) {}
-	
+		catch(IOException | InterruptedException ignored) {}
+
 		tester = new ProcessBuilder("./model_solution");
 		tester.directory(task.dir);
 		tester.redirectOutput( new File(task.dir,"model_solution.out") );
@@ -35,8 +35,7 @@ public class TaskTester
 			Process testerProcess = tester.start();
 			testerProcess.waitFor();	
 		}
-		catch( IOException e ) {}
-		catch( InterruptedException e ) {}
+		catch(IOException | InterruptedException ignored) {}
 
 		ProcessBuilder diff = new ProcessBuilder("diff", "model_solution.out", "user_solution.out");
 		diff.directory(task.dir);
@@ -54,9 +53,8 @@ public class TaskTester
 				return false;
 			}
 		}
-		catch( IOException e ) {}
-		catch( InterruptedException e ) {}
-		
+		catch(IOException | InterruptedException ignored) {}
+
 		return true;
 	}
 
@@ -65,7 +63,7 @@ public class TaskTester
 		File dest = new File(task.dir, "user_solution.cpp");
 		try{
 			Files.write(dest.toPath(), code.getBytes());
-		}catch ( IOException e ){}
+		}catch ( IOException ignored){}
 	}
 
 	public static boolean runAll(Task task,String code) throws GppCompilationException
@@ -79,7 +77,7 @@ public class TaskTester
 	
 		boolean res = true;
 
-		for(int i=0;i<tests.length;i++)res = res && runOne(task,tests[i]);
+		for(int i = 0; i< Objects.requireNonNull(tests).length; i++)res = res && runOne(task,tests[i]);
 
 		return res;
 	}
