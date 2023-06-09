@@ -1,20 +1,20 @@
 package Project;
 
+import Project.Controllers.CodeEditorController;
 import Project.Controllers.ShowTaskController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     public static Scene scene;
@@ -29,7 +29,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("ShowText"), 900, 600);
+        scene = new Scene(loadFXML("ShowText"));
         stage.initStyle(StageStyle.UNDECORATED);
         root.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -39,23 +39,32 @@ public class App extends Application {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });
-        scene.setOnKeyPressed(keyEvent ->  {
-            if (Objects.requireNonNull(keyEvent.getCode()) == KeyCode.ESCAPE) {
+        scene.addEventFilter(KeyEvent.KEY_RELEASED, KE ->  {
+            if (Objects.requireNonNull(KE.getCode()) == KeyCode.ESCAPE) {
                 System.exit(0);
             }
-            if(Objects.requireNonNull(keyEvent.getCode()) == KeyCode.F1){
-                ShowTaskController con = fxmlLoader.getController();
-                System.out.println("tak");
+            if(Objects.requireNonNull(KE.getCode()) == KeyCode.ALT) {
+                System.out.println("F1 PRESSED");
+                if (scene == null)
+                    System.out.println("Scene is null");
+                else
+                System.out.println("Scene is not null");
+                Initializable con = (Initializable)fxmlLoader.getController();
+                System.out.println(con);
                 try {
-                    con.loadSecond();
+                    if (con instanceof ShowTaskController) {
+                        ShowTaskController STcon = (ShowTaskController)con;
+                        STcon.loadSecond();
+                    } else {
+                        CodeEditorController CEcon = (CodeEditorController)con;
+                        CEcon.loadSecond();
+                    }
                 } catch (IOException ignored) {}
             }
 
         });
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
-
     }
 
     public static void setRoot(String fxml) throws IOException {

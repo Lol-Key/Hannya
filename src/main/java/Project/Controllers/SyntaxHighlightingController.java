@@ -108,7 +108,7 @@ public class SyntaxHighlightingController {
 						while (line != null) {
 							if (line.equals("END_OF_TAGS")) {
 								tagsEnded = true;
-							} else if (!tagsEnded) { 
+							} else if (!tagsEnded) {
 								tags.add(line);
 							} else {
 								fileCodeBuilder.append(line);
@@ -133,6 +133,7 @@ public class SyntaxHighlightingController {
 
 	@FXML
 	private void initialize(String text) {
+		codeArea.requestFollowCaret();
 		codeArea.getStylesheets().add(SyntaxHighlightingController.class.getResource("cpp-keywords.css").toExternalForm());
 		codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
 		codeArea.replaceText(text);

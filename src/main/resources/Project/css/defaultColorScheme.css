@@ -9,6 +9,10 @@
     -fx-text-fill: #FCF0CC;
 }
 
+.anchor-pane .content {
+    -fx-background-radius: 0;
+}
+
 .button {
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;
@@ -16,6 +20,10 @@
     -fx-font-size: 13pt;
     -fx-background-color: #001A23;
     -fx-text-fill: #FCF0CC;
+}
+
+.button .content {
+    -fx-background-radius: 0;
 }
 
 .toggle-button {
@@ -27,6 +35,10 @@
     -fx-text-fill: #FCF0CC;
 }
 
+.togle-button .content {
+    -fx-background-radius: 0;
+}
+
 .label {
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;
@@ -34,4 +46,21 @@
     -fx-font-size: 13pt;
     -fx-background-color: #001A23;
     -fx-text-fill: #FCF0CC;
+}
+
+.label .content {
+    -fx-background-radius: 0;
+}
+
+.grid-pane {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 13pt;
+    -fx-background-color: #001A23;
+    -fx-text-fill: #FCF0CC;
+}
+
+.grid-pane .content {
+    -fx-background-radius: 0;
 }

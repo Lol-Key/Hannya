@@ -78,11 +78,9 @@ public class ShowTaskController implements Initializable  {
         }
     }
 
-
     @FXML
     private void onSkip() throws IOException {
         current = Task.randomTask();
-        System.out.println(current.dir.getAbsolutePath());
         labelTaskText.setText(Files.readString(Paths.get(current.dir.getAbsolutePath()+ fileSeparator + "text.txt")));
         labelTaskName.setText(current.dir.getName());
         CodeEditorController.text = "";
@@ -111,10 +109,10 @@ public class ShowTaskController implements Initializable  {
             throw new RuntimeException(e);
         }
         labelTaskName.setText(current.dir.getName());
-        if(currentLevel.lvl1){
+        if(currentLevel.lvl1) {
             toggleButton1.setSelected(true);
         }
-        if(currentLevel.lvl2){
+        if(currentLevel.lvl2) {
             toggleButton2.setSelected(true);
         }
 
@@ -128,7 +126,7 @@ public class ShowTaskController implements Initializable  {
         Scene scene = buttonRun.getScene();
 
         root.translateXProperty().set(-scene.getWidth());
-        CodeEditorController.Transit(root, parentContainer, anchorRoot);
+        CodeEditorController.Transit(root, parentContainer, anchorRoot, scene.getWidth() - 5);
     }
 
     private void loadPopUp() {
@@ -153,12 +151,8 @@ public class ShowTaskController implements Initializable  {
             });
             s.setScene (ss);
             s.show();
-            s.setResizable(false);
         } catch (Exception ex) {
             System.out.println("Cant load new window");
         }
     }
-
-
-
 }
