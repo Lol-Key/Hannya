@@ -51,7 +51,7 @@ public class CodeEditorController implements Initializable {
 
     @FXML
     private void refreshSyntaxHighlighting() {
-        syntaxHighlightingController.refreshSyntaxHighlighting();
+        syntaxHighlightingController.refreshSyntaxHighlighting(false);
     }
 
     public void initialize(URL url, ResourceBundle rb) {
