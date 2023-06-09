@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@700&display=swap');
+
+.anchor-pane {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 20pt;
+    -fx-background-color: #001A23;
+    -fx-text-fill: #FCF0CC;
+}
+
+.button {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 20pt;
+    -fx-background-color: #001A23;
+    -fx-text-fill: #FCF0CC;
+}
+
+.toggle-button {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 20pt;
+    -fx-background-color: #001A23;
+    -fx-text-fill: #FCF0CC;
+}
+
+.label {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 20pt;
+    -fx-background-color: #001A23;
+    -fx-text-fill: #FCF0CC;
+}

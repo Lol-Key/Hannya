@@ -4,9 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="popUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #282828;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.PopUpController">
-        <Label fx:id="labelResult" layoutX="177.0" layoutY="64.0" text="Result" textFill="WHITE">
+<AnchorPane fx:id="popUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="400.0" stylesheets="@css/defaultColorScheme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.PopUpController">
+        <Label fx:id="labelResult" layoutX="-5.0" layoutY="-1.0" prefHeight="156.0" prefWidth="406.0" stylesheets="@css/defaultColorScheme.css" text="Result" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>

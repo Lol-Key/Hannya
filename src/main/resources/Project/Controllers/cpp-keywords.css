@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+
+.styled-text-area {
+    -fx-background-color: #001A23;
+    -fx-font-size: 20pt;
+}
+
+.styled-text-area .lineno {
+    -fx-background-color: #001A23;
+    -fx-stroke: #001A23;
+    -fx-font-size: 1pt;
+}
+
+.paragraph-text {
+    -fx-tab-size: 4;
+    -fx-font-family: 'Roboto Mono', monospace;
+}
+
+.caret {
+    -fx-stroke: #FCF0CC;
+}
+
+.styled-text-area .keyword {
+    -fx-fill: #A42CD6;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .type {
+    -fx-fill: #F25757;
+    -fx-font-weight: bold;
+}
+
+.styled-text-area .string {
+    -fx-fill: #808782;
+}
+
+.styled-text-area .comment {
+	-fx-fill: cadetblue;
+}
+
+.styled-text-area .suggestion {
+	-fx-fill: #D8D8F0;
+}
+
+.styled-text-area .normal {
+	-fx-fill: #FCF0CC;
+}
+
+.styled-text-area .paragraph-box:has-caret {
+    -fx-background-color: #0A2E36;
+}
