@@ -1,6 +1,8 @@
 package Project;
 
 import javafx.animation.FadeTransition;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -49,6 +51,7 @@ public class App extends Application {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });*/
+        Media yeat = new Media(App.class.getResource("yeat.mp3").toExternalForm());
         Image img = new Image(App.class.getResource("loadingScreen.jpg").toExternalForm());
         ImageView imgView = new ImageView(img);
         ImageView imgView2 = new ImageView(img);
@@ -67,13 +70,20 @@ public class App extends Application {
         ft.setCycleCount(1000 * 1000);
         ft.setAutoReverse(true);
         ft.play();
+        MediaPlayer howItGo = new MediaPlayer(yeat);
+        howItGo.setVolume(0);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(7000),new KeyValue(howItGo.volumeProperty(), 1)));
+        howItGo.play();
+        timeline.play();
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             if (loadingRoot == mainScene.getRoot()) {
                 ft.stop();
                 double reachedOpacity = imgView.opacityProperty().doubleValue();
-                FadeTransition ft2 = new FadeTransition(Duration.millis(3000 * reachedOpacity), imgView);
+                FadeTransition ft2 = new FadeTransition(Duration.millis(7000 * reachedOpacity), imgView);
                 ft2.setFromValue(reachedOpacity);
                 ft2.setToValue(0.0);
+                Timeline timeline2 = new Timeline(new KeyFrame(Duration.millis(5000),new KeyValue(howItGo.volumeProperty(), 0)));
+                timeline2.play();
                 ft2.play();
                 ft2.setOnFinished(t -> {
                     quitLoadingScreen();
