@@ -7,13 +7,29 @@ public class Task
 {
 	static Random gen = new Random( 2137 );
 	public static Task current = new Task();
-	public File dir=null;
+	
+	File dir = null;
+	String statement="";
+	int timeLimit = 1500;
 
 	Task(){
 		String absolutePath = System.getProperty("user.dir");
 		String fileSeparator = System.getProperty("file.separator");
 		dir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator+ "Zadanie 1" + fileSeparator);
 	}
+
+	Task(File DIR)
+	{
+		this.dir = DIR;
+		statement = TaskInfoLoader.LoadStatment(dir);
+		timeLimit = TaskInfoLoader.loadTimeLimit(dir);
+	}
+
+	public int getTimeLimit(){ return timeLimit; }
+
+	public String getStatement(){ return statement; } 
+
+	public File getDirectory(){ return dir; }
 
 	public static Task randomTask()
 	{
@@ -30,7 +46,7 @@ public class Task
 		for (File candidate : candidates) {
 			if (candidate.isFile()) continue;
 			if (0 == rand--) continue;
-			res.dir = candidate;
+			res = new Task(candidate);
 			break;
 		}
 

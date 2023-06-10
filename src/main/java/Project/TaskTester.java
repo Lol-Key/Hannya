@@ -15,20 +15,23 @@ public class TaskTester
 {
 	static boolean runOne(Task task,File test)
 	{
+		File taskDir = task.getDirectory();
+
 		ProcessBuilder tester = new ProcessBuilder("./user_solution");
 		tester.directory(task.dir);
-		tester.redirectOutput( new File(task.dir,"user_solution.out") );
+		tester.redirectOutput( new File(taskDir,"user_solution.out") );
 		tester.redirectInput(test);
 
 		try{
-		Process testerProcess = tester.start();
-		testerProcess.waitFor(1500, TimeUnit.MILLISECONDS);
+			Process testerProcess = tester.start();
+			System.out.println(task.timeLimit);
+			testerProcess.waitFor(task.timeLimit , TimeUnit.MILLISECONDS);
 		}
 		catch(IOException | InterruptedException ignored) {}
 
 		tester = new ProcessBuilder("./model_solution");
 		tester.directory(task.dir);
-		tester.redirectOutput( new File(task.dir,"model_solution.out") );
+		tester.redirectOutput( new File(taskDir,"model_solution.out") );
 		tester.redirectInput(test);
 
 		try {
@@ -37,8 +40,8 @@ public class TaskTester
 		}
 		catch(IOException | InterruptedException ignored) {}
 
-		ProcessBuilder diff = new ProcessBuilder("diff", "model_solution.out", "user_solution.out");
-		diff.directory(task.dir);
+		ProcessBuilder diff = new ProcessBuilder("diff", "model_solution.out", "user_solution.out", "-w");
+		diff.directory(taskDir);
 
 		try {
 			System.out.println("Diffin");
@@ -49,7 +52,6 @@ public class TaskTester
 			{
 				String line=diffOut.readLine();
 				if(line==null)break;
-				//System.out.println( line );
 				return false;
 			}
 		}
@@ -72,14 +74,16 @@ public class TaskTester
 		GppFactory.compile(task.dir, "user_solution");
 		GppFactory.compile(task.dir, "model_solution");
 		
+		File testDir = new File(task.dir,"tests");
 		FilenameFilter filter = new FilenameFilter(){ public boolean accept(File dir, String name) { return name.endsWith(".in"); } };
-		File[] tests = task.dir.listFiles( filter );
+		File[] tests = testDir.listFiles( filter );
 	
-		boolean res = true;
+		for(int i = 0; i< Objects.requireNonNull(tests).length; i++)
+		{
+			if(!runOne(task,tests[i]))return false;
+		}
 
-		for(int i = 0; i< Objects.requireNonNull(tests).length; i++)res = res && runOne(task,tests[i]);
-
-		return res;
+		return true;
 	}
 
 }

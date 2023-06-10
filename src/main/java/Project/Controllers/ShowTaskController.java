@@ -61,6 +61,9 @@ public class ShowTaskController implements Initializable  {
     private double yOffset = 0;
     private final String fileSeparator = System.getProperty("file.separator");
     public static String error = "";
+
+    static String mdfxTxt = "";
+
     @FXML
     private void onRun()  {
         boolean ok;
@@ -89,7 +92,7 @@ public class ShowTaskController implements Initializable  {
     @FXML
     private void onSkip() throws IOException {
         current = Task.randomTask();
-        String mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
+        mdfxTxt = current.getStatement(); //IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
 
             MarkdownView markdownView = new MarkdownView(mdfxTxt) {
                 @Override
@@ -100,8 +103,10 @@ public class ShowTaskController implements Initializable  {
             markdownView.setMdString(mdfxTxt);
             markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
             taskStatementScrollPane.setContent(markdownView);
-        
-        labelTaskName.setText(current.dir.getName());
+	    taskStatementScrollPane.setFitToWidth(true);
+	    taskStatementScrollPane.setFitToHeight(true);
+
+        labelTaskName.setText(current.getDirectory().getName());
         CodeEditorController.text = "";
         currentLevel.toFalse();
     }
@@ -123,7 +128,7 @@ public class ShowTaskController implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            String mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
+            if(mdfxTxt.equals(""))mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
 
             MarkdownView markdownView = new MarkdownView(mdfxTxt) {
                 @Override
@@ -133,19 +138,22 @@ public class ShowTaskController implements Initializable  {
             };
             markdownView.setMdString(mdfxTxt);
             markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
-            taskStatementScrollPane.setContent(markdownView);
+	    markdownView.setFillWidth(false);
+
+	    taskStatementScrollPane.setContent(markdownView);
+	    taskStatementScrollPane.setFitToWidth(true);
+	    taskStatementScrollPane.setFitToHeight(true);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        labelTaskName.setText(current.dir.getName());
+        labelTaskName.setText(current.getDirectory().getName());
         if(currentLevel.lvl1) {
             toggleButton1.setSelected(true);
         }
         if(currentLevel.lvl2) {
             toggleButton2.setSelected(true);
         }
-
-        //System.out.println("tut");
     }
 
     @FXML

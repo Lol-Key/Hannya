@@ -1,7 +1,4 @@
+#include<bits/stdc++.h>
+using namespace std;
 
-int main() {
-	float n = 1;
-	double m = 2;
-	cout << n * m;
-	return 0;
-}
+int main(){ cout << "Hello world"; }
