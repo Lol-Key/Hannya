@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@700&display=swap');
 
+.scroll-pane {
+    -fx-background-color: #001A23;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
 .anchor-pane {
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;

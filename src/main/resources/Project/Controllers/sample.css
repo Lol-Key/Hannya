@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@700&display=swap');
+* {
+    -mdfx-font-color: #FCF0CC;
+    -mdfx-link-color: blue;
+    -mdfx-border-color-1: #FCF0CC;
+ 
+    -mdfx-bg-color-3: #003E53;
+    -mdfx-bg-color-2: #003E53;
+    -mdfx-bg-color-1: #005D7C;
+    -fx-background-color: #001A23;
+ 
+    -mdfx-bq-color-border: #FCF0CC; /* the blockquote's border color */
+    -mdfx-bq-color-background: #001A23; /* the blockquote's background color */
+ }
+ 
+ .markdown-text {
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 13pt;
+ }
+ .markdown-italic {
+   -fx-font-style: italic;
+ }
+ .markdown-bold {
+   -fx-font-weight: bold;
+ }
+ .markdown-strikethrough {
+   -fx-strikethrough: true;
+ }
+ 

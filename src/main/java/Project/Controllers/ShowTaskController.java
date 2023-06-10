@@ -2,14 +2,19 @@ package Project.Controllers;
 
 import Project.*;
 import com.jfoenix.controls.JFXToggleButton;
+import com.sandec.mdfx.MarkdownView;
+
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -19,8 +24,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import org.apache.commons.io.IOUtils;
 
 import static Project.App.fxmlLoader;
 import static Project.Level.currentLevel;
@@ -36,7 +44,7 @@ public class ShowTaskController implements Initializable  {
     @FXML
     private  VBox anchorRoot;
     @FXML
-    private Label labelTaskText;
+    private ScrollPane taskStatementScrollPane;
     @FXML
     private Label labelTaskName;
     @FXML
@@ -81,7 +89,18 @@ public class ShowTaskController implements Initializable  {
     @FXML
     private void onSkip() throws IOException {
         current = Task.randomTask();
-        labelTaskText.setText(Files.readString(Paths.get(current.dir.getAbsolutePath()+ fileSeparator + "text.txt")));
+        String mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
+
+            MarkdownView markdownView = new MarkdownView(mdfxTxt) {
+                @Override
+                protected List<String> getDefaultStylesheets() {
+                    return List.of(App.class.getResource("sample.css").toExternalForm());
+                }
+            };
+            markdownView.setMdString(mdfxTxt);
+            markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
+            taskStatementScrollPane.setContent(markdownView);
+        
         labelTaskName.setText(current.dir.getName());
         CodeEditorController.text = "";
         currentLevel.toFalse();
@@ -104,7 +123,17 @@ public class ShowTaskController implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            labelTaskText.setText(Files.readString(Paths.get(current.dir.getAbsolutePath()+ fileSeparator + "text.txt")));
+            String mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
+
+            MarkdownView markdownView = new MarkdownView(mdfxTxt) {
+                @Override
+                protected List<String> getDefaultStylesheets() {
+                    return List.of(App.class.getResource("sample.css").toExternalForm());
+                }
+            };
+            markdownView.setMdString(mdfxTxt);
+            markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
+            taskStatementScrollPane.setContent(markdownView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
