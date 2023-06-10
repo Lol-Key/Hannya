@@ -4,17 +4,14 @@ import Project.*;
 import com.jfoenix.controls.JFXToggleButton;
 import com.sandec.mdfx.MarkdownView;
 
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,7 +27,6 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.io.IOUtils;
 
-import static Project.App.fxmlLoader;
 import static Project.Level.currentLevel;
 import static Project.Task.current;
 import static javafx.scene.input.KeyCode.ESCAPE;
@@ -39,8 +35,6 @@ import static javafx.scene.input.KeyCode.ESCAPE;
 
 public class ShowTaskController implements Initializable  {
 
-    @FXML
-    private  AnchorPane parentContainer;
     @FXML
     private  VBox anchorRoot;
     @FXML
@@ -100,9 +94,9 @@ public class ShowTaskController implements Initializable  {
                     return List.of(App.class.getResource("sample.css").toExternalForm());
                 }
             };
-            markdownView.setMdString(mdfxTxt);
-            markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
-            taskStatementScrollPane.setContent(markdownView);
+        markdownView.setMdString(mdfxTxt);
+        markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
+        taskStatementScrollPane.setContent(markdownView);
 	    taskStatementScrollPane.setFitToWidth(true);
 	    taskStatementScrollPane.setFitToHeight(true);
 
@@ -122,11 +116,12 @@ public class ShowTaskController implements Initializable  {
 
     @FXML
     private void onNieWiem() throws IOException{
-        loadSecond();
+        
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("test");
         try {
             if(mdfxTxt.equals(""))mdfxTxt = IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
 
@@ -136,8 +131,8 @@ public class ShowTaskController implements Initializable  {
                     return List.of(App.class.getResource("sample.css").toExternalForm());
                 }
             };
-            markdownView.setMdString(mdfxTxt);
-            markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
+        markdownView.setMdString(mdfxTxt);
+        markdownView.getStylesheets().add(App.class.getResource("sample.css").toExternalForm());
 	    markdownView.setFillWidth(false);
 
 	    taskStatementScrollPane.setContent(markdownView);
@@ -154,16 +149,6 @@ public class ShowTaskController implements Initializable  {
         if(currentLevel.lvl2) {
             toggleButton2.setSelected(true);
         }
-    }
-
-    @FXML
-    public void loadSecond() throws IOException {
-        fxmlLoader = new FXMLLoader(Objects.requireNonNull(App.class.getResource(  "CodeEditor.fxml")));
-        Parent root = fxmlLoader.load();
-        Scene scene = buttonRun.getScene();
-
-        root.translateXProperty().set(-scene.getWidth());
-        CodeEditorController.Transit(root, parentContainer, anchorRoot, scene.getWidth() - 5);
     }
 
     private void loadPopUp() {

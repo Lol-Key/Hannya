@@ -1,64 +1,54 @@
 package Project;
 
-import Project.Controllers.CodeEditorController;
-import Project.Controllers.ShowTaskController;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-
-import org.apache.commons.io.IOUtils;
-
-import com.sandec.mdfx.MarkdownView;
 
 public class App extends Application {
 
-    public static Scene scene;
+    public static Scene mainScene;
     public static int sizeOfTasks;
 
     private double xOffset = 0;
     private double yOffset = 0;
 
-    private static Parent root;
-
-    public static FXMLLoader fxmlLoader;
+    public static Parent currentRoot;
+    public static Parent codeEditorRoot;
+    public static Parent showTaskRoot;
+    public static Group rootGroup;
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        scene = new Scene(loadFXML("ShowText"));
+        codeEditorRoot = loadFXML("CodeEditor");
+        showTaskRoot = loadFXML("ShowText");
+        rootGroup = new Group(codeEditorRoot, showTaskRoot);
         stage.initStyle(StageStyle.UNDECORATED);
-        root.setOnMousePressed(event -> {
+        /*
+        currentRoot.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
-        root.setOnMouseDragged(event -> {
+        currentRoot.setOnMouseDragged(event -> {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
-        });
-        stage.setScene(scene);
+        });*/
         Image img = new Image(App.class.getResource("loadingScreen.jpg").toExternalForm());
         ImageView imgView = new ImageView(img);
         ImageView imgView2 = new ImageView(img);
@@ -68,15 +58,17 @@ public class App extends Application {
         imgView2.setFitWidth(1200);
         imgView2.setFitHeight(800);
         Group loadingRoot = new Group(imgView2, imgView);
-        scene.setRoot(loadingRoot);
+        mainScene = new Scene(loadingRoot);
+        mainScene.setRoot(loadingRoot);
+        stage.setScene(mainScene);
         FadeTransition ft = new FadeTransition(Duration.millis(3000), imgView);
         ft.setFromValue(1.0);
         ft.setToValue(0.0);
         ft.setCycleCount(1000 * 1000);
         ft.setAutoReverse(true);
         ft.play();
-        scene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
-            if (scene.getRoot() != root) {
+        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
+            if (loadingRoot == mainScene.getRoot()) {
                 ft.stop();
                 double reachedOpacity = imgView.opacityProperty().doubleValue();
                 FadeTransition ft2 = new FadeTransition(Duration.millis(3000 * reachedOpacity), imgView);
@@ -92,46 +84,46 @@ public class App extends Application {
     }
 
     private void quitLoadingScreen() {
-        scene.setRoot(root);
-        scene.addEventFilter(KeyEvent.KEY_RELEASED, KE ->  {
-            if (Objects.requireNonNull(KE.getCode()) == KeyCode.ESCAPE) {
+        mainScene.setRoot(rootGroup);
+        showTaskRoot.translateXProperty().set(mainScene.getWidth());
+        currentRoot = codeEditorRoot;
+        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE ->  {
+            if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             }
-            if(Objects.requireNonNull(KE.getCode()) == KeyCode.ALT) {
-                System.out.println("F1 PRESSED");
-                if (scene == null)
-                    System.out.println("Scene is null");
-                else
-                System.out.println("Scene is not null");
-                Initializable con = (Initializable)fxmlLoader.getController();
-                System.out.println(con);
-                try {
-                    if (con instanceof ShowTaskController) {
-                        ShowTaskController STcon = (ShowTaskController)con;
-                        STcon.loadSecond();
-                    } else {
-                        CodeEditorController CEcon = (CodeEditorController)con;
-                        CEcon.loadSecond();
-                    }
-                } catch (IOException ignored) {}
+            if (KE.getCode() == KeyCode.ALT) {
+                loadSecond();
             }
         });
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    void loadSecond() {
+        double codeEditorPos = 0.0;
+        double showTaskPos = 0.0;
+        if (currentRoot == codeEditorRoot) {
+            showTaskRoot.translateXProperty().set(mainScene.getWidth());
+            codeEditorPos = - mainScene.getWidth();
+            currentRoot = showTaskRoot;
+        } else {
+            codeEditorRoot.translateXProperty().set(-mainScene.getWidth());
+            showTaskPos = mainScene.getWidth();
+            currentRoot = codeEditorRoot;
+        }
+        sceneTranslation(codeEditorPos, showTaskPos);
+    }
+
+    protected static <T> void sceneTranslation(double codeEditorPos, double showTaskPos) {
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(codeEditorRoot.translateXProperty(), codeEditorPos, Interpolator.EASE_OUT);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.3), kv);
+        timeline.getKeyFrames().add(kf);
+        KeyValue kv2 = new KeyValue(showTaskRoot.translateXProperty(), showTaskPos, Interpolator.EASE_OUT);
+        KeyFrame kf2 = new KeyFrame(Duration.seconds(0.3), kv2);
+        timeline.getKeyFrames().add(kf2);
+        timeline.play();
     }
 
     public static Parent loadFXML(String fxml) throws IOException {
-        fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        root = fxmlLoader.load();
-        return root;
+        return FXMLLoader.load(App.class.getResource(fxml + ".fxml"));
     }
-
-    public static void main(String[] args) {
-
-        launch();
-
-    }
-
 }
