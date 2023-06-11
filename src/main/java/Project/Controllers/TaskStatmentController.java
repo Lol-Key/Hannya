@@ -53,7 +53,7 @@ public class TaskStatmentController implements Initializable {
             current = Task.randomTask();
         }
         System.out.println(current.getDirectory());
-        mdfxTxt = current.getStatement(); //IOUtils.toString(App.class.getResourceAsStream("sample.md"), "UTF-8");
+        mdfxTxt = current.getStatement();
 
         MarkdownView markdownView = new MarkdownView(mdfxTxt) {
             @Override
@@ -72,11 +72,7 @@ public class TaskStatmentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        System.out.println("test");
-        try {
-            if (mdfxTxt.equals(""))
-                mdfxTxt = IOUtils.toString(Objects.requireNonNull(App.class.getResourceAsStream("sample.md")), StandardCharsets.UTF_8);
+            if (mdfxTxt.equals(""))mdfxTxt = current.getStatement(); 
 
             MarkdownView markdownView = new MarkdownView(mdfxTxt) {
                 @Override
@@ -92,9 +88,6 @@ public class TaskStatmentController implements Initializable {
             taskStatementScrollPane.setFitToWidth(true);
             taskStatementScrollPane.setFitToHeight(true);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         stTaskStatementScrollPane = taskStatementScrollPane;
 
 

@@ -2,4 +2,4 @@
 
 using namespace std;
 
-int main(){ cout<<"Gówien"; }
+int main(){ cout<<"Gówienko"; }
