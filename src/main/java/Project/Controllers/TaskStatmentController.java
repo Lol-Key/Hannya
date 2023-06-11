@@ -38,6 +38,7 @@ public class TaskStatmentController implements Initializable {
     private VBox anchorRoot;
     @FXML
     private ScrollPane taskStatementScrollPane;
+    public static ScrollPane stTaskStatementScrollPane;
     @FXML
     private Label labelTaskName;
     public static String error = "";
@@ -45,8 +46,7 @@ public class TaskStatmentController implements Initializable {
     static String mdfxTxt = "";
 
 
-    @FXML
-    private void onSkip() throws IOException {
+    public static void skip()  {
         Task old = current;
         current = Task.randomTask();
         while (old.equals(current)) {
@@ -63,26 +63,16 @@ public class TaskStatmentController implements Initializable {
         };
         markdownView.setMdString(mdfxTxt);
         markdownView.getStylesheets().add(Objects.requireNonNull(App.class.getResource("sample.css")).toExternalForm());
-        taskStatementScrollPane.setContent(markdownView);
-        taskStatementScrollPane.setFitToWidth(true);
-        taskStatementScrollPane.setFitToHeight(true);
+        stTaskStatementScrollPane.setContent(markdownView);
+        stTaskStatementScrollPane.setFitToWidth(true);
+        stTaskStatementScrollPane.setFitToHeight(true);
 
-        labelTaskName.setText(current.getDirectory().getName());
         CodeEditorController.text = "";
-    }
-
-    @FXML
-    private void onSwitch1() {
-
-    }
-
-    @FXML
-    private void onSwitch2() {
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         System.out.println("test");
         try {
             if (mdfxTxt.equals(""))
@@ -105,7 +95,8 @@ public class TaskStatmentController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //labelTaskName.setText(current.getDirectory().getName());
+        stTaskStatementScrollPane = taskStatementScrollPane;
+
 
     }
 

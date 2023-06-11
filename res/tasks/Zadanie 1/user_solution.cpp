@@ -1,7 +1,3 @@
 #include <iostream>
 using namespace std;
-int main(){
-    cout << "Hecckcllo world";
-        }
-
-
+int main(){ cout << "Hello worlddgd";}

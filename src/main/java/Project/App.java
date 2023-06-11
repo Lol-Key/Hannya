@@ -1,5 +1,6 @@
 package Project;
 
+import Project.Controllers.TaskStatmentController;
 import Project.Controllers.TestController;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -30,6 +31,7 @@ public class App extends Application {
     public static Scene mainScene;
     double xOffset;
     double yOffset;
+    int i = 0;
 
     public static ViewSwitcher viewSwitcher;
     public static ViewSwitcherBuilder viewSwitcherBuilder;
@@ -40,6 +42,7 @@ public class App extends Application {
     final KeyCombination RIGHT_EVENT = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
     final KeyCombination SUBMIT_EVENT = new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN);
     final KeyCombination TEST_EVENT = new KeyCodeCombination(KeyCode.T, KeyCombination.ALT_DOWN);
+    final KeyCombination SKIP_EVENT = new KeyCodeCombination(KeyCode.S, KeyCombination.ALT_DOWN);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -124,6 +127,8 @@ public class App extends Application {
                 TestController.submit();
             } else if (TEST_EVENT.match(KE)) {
                 TestController.test();
+            }else if (SKIP_EVENT.match(KE)){
+                TaskStatmentController.skip();
             }
         });
     }

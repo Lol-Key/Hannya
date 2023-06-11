@@ -44,6 +44,7 @@ public class TestController implements Initializable {
         try{
             TaskTester.runAll(current, textFromArea);
         }catch(GppFactory.GppCompilationException gppExp){
+            System.out.println("hjkdafhkjdcs");
             stAreaRes.setText("Compilation Error");
             stAreaSolv.setText("");
             stAreaTest.setText("");
@@ -53,6 +54,8 @@ public class TestController implements Initializable {
             return;
         }
         stAreaRes.setText("OK");
+        stAreaSolv.setText("");
+        stAreaTest.setText("");
         test = null;
         myAns = "";
         solAns = "";
@@ -76,6 +79,8 @@ public class TestController implements Initializable {
             return;
         }
         stAreaRes.setText("OK");
+        stAreaSolv.setText("");
+        stAreaTest.setText("");
         test = null;
         myAns = "";
         solAns = "";
@@ -105,9 +110,4 @@ public class TestController implements Initializable {
         areaSolv.setEditable(false);
     }
 }
-//
-//#include <iostream>
-//using namespace std;
-//int main(){
-//    cout << "Hello world";
-//        }
+
