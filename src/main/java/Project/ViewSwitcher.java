@@ -93,7 +93,7 @@ public class ViewSwitcher {
         PositionedScene closestGreaterScene = null;
         PositionedScene closestSmallerScene = null;
         for (PositionedScene positionedScene : positionedScenes)
-            if (positionedScene.getRoot() != currentScene.getRoot()) {
+            if (positionedScene.getRoot() != currentScene.getRoot() && positionedScene.getX() == currentScene.getX()) {
                 if (positionedScene.getY() > currentScene.getY()) {
                     if (closestGreaterScene == null || positionedScene.getY() > closestGreaterScene.getY())
                         closestGreaterScene = positionedScene;
@@ -104,15 +104,15 @@ public class ViewSwitcher {
             }
         if (closestSmallerScene != null)
             switchView(closestSmallerScene, 0, 1);
-        else if (closestGreaterScene != null)
-            switchView(closestGreaterScene, 0, 1);
+        /*else if (closestGreaterScene != null)
+            switchView(closestGreaterScene, 0, 1);*/
     }
 
     public void moveDown() {
         PositionedScene closestGreaterScene = null;
         PositionedScene closestSmallerScene = null;
         for (PositionedScene positionedScene : positionedScenes)
-            if (positionedScene.getRoot() != currentScene.getRoot()) {
+            if (positionedScene.getRoot() != currentScene.getRoot() && positionedScene.getX() == currentScene.getX()) {
                 if (positionedScene.getY() > currentScene.getY()) {
                     if (closestGreaterScene == null || positionedScene.getY() < closestGreaterScene.getY())
                         closestGreaterScene = positionedScene;
@@ -123,15 +123,15 @@ public class ViewSwitcher {
             }
         if (closestGreaterScene != null)
             switchView(closestGreaterScene, 0, -1);
-        else if (closestSmallerScene != null)
-            switchView(closestSmallerScene, 0, -1);
+        /*else if (closestSmallerScene != null)
+            switchView(closestSmallerScene, 0, -1);*/
     }
 
     public void moveLeft() {
         PositionedScene closestGreaterScene = null;
         PositionedScene closestSmallerScene = null;
         for (PositionedScene positionedScene : positionedScenes)
-            if (positionedScene.getRoot() != currentScene.getRoot()) {
+            if (positionedScene.getRoot() != currentScene.getRoot() && positionedScene.getY() == currentScene.getY()) {
                 if (positionedScene.getX() > currentScene.getX()) {
                     if (closestGreaterScene == null || positionedScene.getX() > closestGreaterScene.getX())
                         closestGreaterScene = positionedScene;
@@ -142,15 +142,15 @@ public class ViewSwitcher {
             }
         if (closestSmallerScene != null)
             switchView(closestSmallerScene, 1, 0);
-        else if (closestGreaterScene != null)
-            switchView(closestGreaterScene, 1, 0);
+        /*else if (closestGreaterScene != null)
+            switchView(closestGreaterScene, 1, 0);*/
     }
 
     public void moveRight() {
         PositionedScene closestGreaterScene = null;
         PositionedScene closestSmallerScene = null;
         for (PositionedScene positionedScene : positionedScenes)
-            if (positionedScene.getRoot() != currentScene.getRoot()) {
+            if (positionedScene.getRoot() != currentScene.getRoot() && positionedScene.getY() == currentScene.getY()) {
                 if (positionedScene.getX() > currentScene.getX()) {
                     if (closestGreaterScene == null || positionedScene.getX() < closestGreaterScene.getX())
                         closestGreaterScene = positionedScene;
@@ -161,8 +161,8 @@ public class ViewSwitcher {
             }
         if (closestGreaterScene != null)
             switchView(closestGreaterScene, -1, 0);
-        else if (closestSmallerScene != null)
-            switchView(closestSmallerScene, -1, 0);
+        /*else if (closestSmallerScene != null)
+            switchView(closestSmallerScene, -1, 0);*/
     }
 
     public void moveRandom() {

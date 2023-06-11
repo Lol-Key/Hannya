@@ -12,6 +12,8 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,6 +32,11 @@ public class App extends Application {
 
     public static ViewSwitcher viewSwitcher;
     public static ViewSwitcherBuilder viewSwitcherBuilder;
+
+    final KeyCombination UP_EVENT = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
+    final KeyCombination DOWN_EVENT = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+    final KeyCombination LEFT_EVENT = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
+    final KeyCombination RIGHT_EVENT = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -102,9 +109,14 @@ public class App extends Application {
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
-            }
-            if (KE.getCode() == KeyCode.ALT) {
-                viewSwitcher.moveRandom();
+            } else if (UP_EVENT.match(KE)) {
+                viewSwitcher.moveUp();
+            } else if (DOWN_EVENT.match(KE)) {
+                viewSwitcher.moveDown();
+            } else if (LEFT_EVENT.match(KE)) {
+                viewSwitcher.moveLeft();
+            } else if (RIGHT_EVENT.match(KE)) {
+                viewSwitcher.moveRight();
             }
         });
     }
