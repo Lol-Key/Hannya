@@ -30,16 +30,13 @@ public class App extends Application {
 
     public static boolean duringSwitching = false;
     public static boolean fullyLoaded = false;
-    public static Parent currentRoot;
     public static Parent codeEditorRoot;
     public static Parent showTaskRoot;
-    public static Group rootGroup;
+    public static ViewSwitcher viewSwitcher;
+    public static ViewSwitcherBuilder viewSwitcherBuilder;
 
     @Override
     public void start(Stage stage) throws IOException {
-        codeEditorRoot = loadFXML("CodeEditor");
-        showTaskRoot = loadFXML("TaskStatment");
-        rootGroup = new Group(codeEditorRoot, showTaskRoot);
         stage.initStyle(StageStyle.UNDECORATED);
 
 //        showTaskRoot.setOnMousePressed(event -> {
@@ -61,6 +58,13 @@ public class App extends Application {
         imgView2.setFitHeight(800);
         Group loadingRoot = new Group(imgView2, imgView);
         mainScene = new Scene(loadingRoot);
+
+        // Populating scenes (MUST be after scene loaded)
+        codeEditorRoot = loadFXML("CodeEditor");
+        showTaskRoot = loadFXML("TaskStatment");
+        viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, codeEditorRoot, 0, 0);
+        viewSwitcherBuilder.addScene(showTaskRoot, 1, 0);
+
         mainScene.setRoot(loadingRoot);
         stage.setScene(mainScene);
         FadeTransition ft = new FadeTransition(Duration.millis(3000), imgView);
@@ -105,62 +109,25 @@ public class App extends Application {
     }
 
     private void quitLoadingScreen() {
-        mainScene.setRoot(rootGroup);
-        showTaskRoot.translateXProperty().set(mainScene.getWidth());
-        currentRoot = codeEditorRoot;
+        viewSwitcher = viewSwitcherBuilder.build();
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             }
-            if (KE.getCode() == KeyCode.ALT && fullyLoaded) {
+            if (KE.getCode() == KeyCode.ALT /*&& fullyLoaded*/) {
                 if (!duringSwitching) {
-                    duringSwitching = true;
-                    loadSecond();
+                    //duringSwitching = true;
+                    viewSwitcher.moveRandom();
                 }
             }
         });
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 fullyLoaded = true;
             }
-        }, 1000);
-    }
-
-    void loadSecond() {
-        double codeEditorPos = 0.0;
-        double showTaskPos = 0.0;
-        if (currentRoot == codeEditorRoot) {
-            showTaskRoot.translateXProperty().set(mainScene.getWidth());
-            codeEditorPos = -mainScene.getWidth();
-            currentRoot = showTaskRoot;
-        } else {
-            codeEditorRoot.translateXProperty().set(-mainScene.getWidth());
-            showTaskPos = mainScene.getWidth();
-            currentRoot = codeEditorRoot;
-        }
-
-        sceneTranslation(codeEditorPos, showTaskPos);
-    }
-
-    protected static <T> void sceneTranslation(double codeEditorPos, double showTaskPos) {
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(codeEditorRoot.translateXProperty(), codeEditorPos, Interpolator.EASE_OUT);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.3), kv);
-        timeline.getKeyFrames().add(kf);
-        KeyValue kv2 = new KeyValue(showTaskRoot.translateXProperty(), showTaskPos, Interpolator.EASE_OUT);
-        KeyFrame kf2 = new KeyFrame(Duration.seconds(0.3), kv2);
-        timeline.getKeyFrames().add(kf2);
-
-        timeline.play();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                duringSwitching = false;
-            }
-        }, 300);
+        }, 1000);*/
     }
 
     public static Parent loadFXML(String fxml) throws IOException {

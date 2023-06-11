@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.fxmisc.richtext.CodeArea?>
 
-<AnchorPane  stylesheets="@css/defaultColorScheme.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.CodeEditorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.CodeEditorController">
    <children>
       <CodeArea fx:id="codeArea" layoutX="354.0" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#refreshSyntaxHighlighting" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
