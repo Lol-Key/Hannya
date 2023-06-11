@@ -14,7 +14,13 @@ public class CodeEditorController implements Initializable {
     public static String text = "";
     private static SyntaxHighlightingController syntaxHighlightingController = null;
 
+    public static void stopEditing() {
+        stcCodeArea.editableProperty().set(false);
+    }
 
+    public static void startEditing() {
+        stcCodeArea.editableProperty().set(true);
+    }
 
     @FXML
     private void refreshSyntaxHighlighting() {

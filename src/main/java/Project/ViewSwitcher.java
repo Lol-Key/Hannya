@@ -11,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.effect.BoxBlur;
+import Project.Controllers.CodeEditorController;
 import javafx.scene.effect.GaussianBlur;
 
 public class ViewSwitcher {
@@ -30,6 +31,8 @@ public class ViewSwitcher {
     public ViewSwitcher(Scene scene, PositionedScene defaultScene, Group positionedSceneGroup, ArrayList<PositionedScene> positionedScenes) {
         this.scene = scene;
         this.currentScene = defaultScene;
+        if (currentScene.toString().equals("CodeEditor"))
+            CodeEditorController.startEditing();
         this.positionedSceneGroup = positionedSceneGroup;
         this.positionedScenes = positionedScenes;
         this.scene.setRoot(this.positionedSceneGroup);
@@ -50,6 +53,8 @@ public class ViewSwitcher {
     private void switchView(PositionedScene newScene, int xChange, int yChange) {
         if (!finalized)
             return;
+        if (currentScene.toString().equals("CodeEditor"))
+            CodeEditorController.stopEditing();
         finalized = false;
         System.out.println("Switching scenes : X(" + xChange + ") Y(" + yChange + ")");
         System.out.println("Going from" + currentScene + " to " + newScene);
@@ -93,6 +98,8 @@ public class ViewSwitcher {
             timeline.play();
 
             currentScene = newScene;
+            if (currentScene.toString().equals("CodeEditor"))
+                CodeEditorController.startEditing();
     }
 
     public void moveUp() {
