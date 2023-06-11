@@ -37,7 +37,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        codeEditorRoot = loadFXML("Test");
+        codeEditorRoot = loadFXML("CodeEditor");
         showTaskRoot = loadFXML("TaskStatment");
         rootGroup = new Group(codeEditorRoot, showTaskRoot);
         stage.initStyle(StageStyle.UNDECORATED);
