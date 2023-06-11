@@ -78,13 +78,13 @@ public class App extends Application {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(7000),new KeyValue(howItGo.volumeProperty(), 1)));
         howItGo.play();
         timeline.play();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                quitSession(loadingRoot, ft, imgView, howItGo);
-            }
-        }, 2500);
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                quitSession(loadingRoot, ft, imgView, howItGo);
+//            }
+//        }, 2500);
 
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             quitSession(loadingRoot, ft, imgView, howItGo);
@@ -121,13 +121,13 @@ public class App extends Application {
                 }
             }
         });
-        /*Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                fullyLoaded = true;
-            }
-        }, 1000);*/
+        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                fullyLoaded = true;
+//            }
+//        }, 1000);
     }
 
     public static Parent loadFXML(String fxml) throws IOException {
