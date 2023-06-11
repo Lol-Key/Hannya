@@ -35,6 +35,9 @@ public class App extends Application {
 
     public static ViewSwitcher viewSwitcher;
     public static ViewSwitcherBuilder viewSwitcherBuilder;
+    private boolean duringSkip = false;
+    private boolean duringCompile = false;
+    private boolean duringTest = false;
 
     final KeyCombination UP_EVENT = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
     final KeyCombination DOWN_EVENT = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
@@ -46,6 +49,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setTitle("Hannya");
         stage.initStyle(StageStyle.UNDECORATED);
 
 //        showTaskRoot.setOnMousePressed(event -> {
@@ -123,11 +127,35 @@ public class App extends Application {
                 viewSwitcher.moveLeft();
             } else if (RIGHT_EVENT.match(KE)) {
                 viewSwitcher.moveRight();
-            } else if (SUBMIT_EVENT.match(KE)) {
+            } else if (SUBMIT_EVENT.match(KE) && !duringCompile) {
+                duringCompile = true;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        duringCompile = false;
+                    }
+                }, 1000);
                 TestController.submit();
-            } else if (TEST_EVENT.match(KE)) {
+            } else if (TEST_EVENT.match(KE) && !duringTest) {
+                duringCompile = true;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        duringTest = false;
+                    }
+                }, 1000);
                 TestController.test();
-            }else if (SKIP_EVENT.match(KE)){
+            }else if (SKIP_EVENT.match(KE) && !duringSkip){
+                duringCompile = true;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        duringSkip = false;
+                    }
+                }, 1000);
                 TaskStatmentController.skip();
             }
         });
