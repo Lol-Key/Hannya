@@ -1,5 +1,5 @@
 #pane{
-    -fx-background-image: url("im.jpg");
+    -fx-background-image: url("menu.jpg");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
@@ -12,10 +12,10 @@
     -fx-background-color: transparent;
     -fx-text-fill: transparent;
     -fx-background-radius: 0;
-    -jfx-toggle-color: #009688;
-    -jfx-untoggle-color: #FAFAFA;
-    -jfx-toggle-line-color: #77C2BB;
-    -jfx-untoggle-line-color: #999999;
+    -jfx-toggle-color: #001A23;
+    -jfx-untoggle-color: #001A23;
+    -jfx-toggle-line-color: #003E53;
+    -jfx-untoggle-line-color: #FCF0CC;
     -jfx-size: 10.0;
     -jfx-disable-visual-focus: false;
 

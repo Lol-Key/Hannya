@@ -58,10 +58,10 @@ public class App extends Application {
         ImageView imgView = new ImageView(img);
         ImageView imgView2 = new ImageView(img);
         imgView.setBlendMode(BlendMode.MULTIPLY);
-        imgView.setFitWidth(1200);
-        imgView.setFitHeight(800);
-        imgView2.setFitWidth(1200);
-        imgView2.setFitHeight(800);
+        imgView.setFitWidth(1280);
+        imgView.setFitHeight(720);
+        imgView2.setFitWidth(1280);
+        imgView2.setFitHeight(720);
         Group loadingRoot = new Group(imgView2, imgView);
         mainScene = new Scene(loadingRoot);
 
