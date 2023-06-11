@@ -14,7 +14,9 @@ public class Task {
     Task() {
         String absolutePath = System.getProperty("user.dir");
         String fileSeparator = System.getProperty("file.separator");
-        dir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator + "Zadanie 1" + fileSeparator);
+        dir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator + "art_gallery" + fileSeparator);
+	statement = TaskInfoLoader.LoadStatment(dir);
+	timeLimit = TaskInfoLoader.loadTimeLimit(dir);
     }
 
     Task(File DIR) {
