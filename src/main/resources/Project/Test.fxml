@@ -20,6 +20,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                <children>
+                  <JFXTextArea fx:id="areaTest" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <GridPane GridPane.columnIndex="1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
