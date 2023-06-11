@@ -60,7 +60,7 @@ public class App extends Application {
         mainScene = new Scene(loadingRoot);
 
         // Populating scenes (MUST be after scene loaded)
-        codeEditorRoot = loadFXML("Menu");
+        codeEditorRoot = loadFXML("CodeEditor");
         showTaskRoot = loadFXML("TaskStatment");
         viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, codeEditorRoot, 0, 0);
         viewSwitcherBuilder.addScene(showTaskRoot, 1, 0);

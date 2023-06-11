@@ -15,8 +15,6 @@ public class TestController implements Initializable {
     public JFXTextArea areaTest;
     @FXML
     public JFXTextArea areaRes;
-    @FXML
-    public JFXTextArea areaSol;
 
 
 
@@ -25,8 +23,6 @@ public class TestController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        areaTest.setEditable(false);
-        areaSol.setEditable(false);
         areaRes.setEditable(false);
     }
 }
