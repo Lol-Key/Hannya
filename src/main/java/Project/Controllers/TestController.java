@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.security.PublicKey;
 import java.util.ResourceBundle;
 
 public class TestController implements Initializable {
@@ -15,6 +16,8 @@ public class TestController implements Initializable {
     public JFXTextArea areaTest;
     @FXML
     public JFXTextArea areaRes;
+    @FXML
+    public JFXTextArea areaSolv;
 
 
 
@@ -24,5 +27,7 @@ public class TestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         areaRes.setEditable(false);
+        areaTest.setEditable(false);
+        areaSolv.setEditable(false);
     }
 }
