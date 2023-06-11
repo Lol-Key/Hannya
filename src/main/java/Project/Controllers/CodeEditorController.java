@@ -14,6 +14,8 @@ public class CodeEditorController implements Initializable {
     public static String text = "";
     private static SyntaxHighlightingController syntaxHighlightingController = null;
 
+
+
     @FXML
     private void refreshSyntaxHighlighting() {
         syntaxHighlightingController.refreshSyntaxHighlighting(false);

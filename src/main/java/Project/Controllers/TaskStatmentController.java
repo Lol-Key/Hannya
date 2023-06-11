@@ -44,10 +44,6 @@ public class TaskStatmentController implements Initializable {
 
     static String mdfxTxt = "";
 
-    @FXML
-    private void onRun(ActionEvent event) {
-
-    }
 
     @FXML
     private void onSkip() throws IOException {
@@ -109,7 +105,7 @@ public class TaskStatmentController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        labelTaskName.setText(current.getDirectory().getName());
+        //labelTaskName.setText(current.getDirectory().getName());
 
     }
 

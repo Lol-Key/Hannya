@@ -1,5 +1,6 @@
 package Project;
 
+import Project.Controllers.TestController;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,8 @@ public class App extends Application {
     final KeyCombination DOWN_EVENT = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
     final KeyCombination LEFT_EVENT = new KeyCodeCombination(KeyCode.LEFT, KeyCombination.ALT_DOWN);
     final KeyCombination RIGHT_EVENT = new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.ALT_DOWN);
+    final KeyCombination SUBMIT_EVENT = new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN);
+    final KeyCombination TEST_EVENT = new KeyCodeCombination(KeyCode.T, KeyCombination.ALT_DOWN);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -117,6 +120,10 @@ public class App extends Application {
                 viewSwitcher.moveLeft();
             } else if (RIGHT_EVENT.match(KE)) {
                 viewSwitcher.moveRight();
+            } else if (SUBMIT_EVENT.match(KE)) {
+                TestController.submit();
+            } else if (TEST_EVENT.match(KE)) {
+                TestController.test();
             }
         });
     }
@@ -125,3 +132,5 @@ public class App extends Application {
         return FXMLLoader.load(Objects.requireNonNull(App.class.getResource(fxml + ".fxml")));
     }
 }
+
+//

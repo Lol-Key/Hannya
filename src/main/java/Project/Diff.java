@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class Diff
 {
-	boolean different=false;
+	boolean different;
 
 	String first,second;
 
@@ -20,6 +20,7 @@ public class Diff
 	public static Diff Factory(File dir,String name1,String name2)
 	{
 		Diff result = new Diff();
+		result.different = false;
 
 		ProcessBuilder diff = new ProcessBuilder("diff", name1, name2, "-w");
 		diff.directory(dir);
@@ -32,13 +33,13 @@ public class Diff
 			{
 				String line = diffOut.readLine();
 				if(line==null) break;
-				result.different = false;
+				result.different = true;
 				break;
 			}
 		} catch (IOException | InterruptedException ignored) {}
 
 		result.first = FileHelper.fileToString(new File(dir,name1));	
-		result.second = FileHelper.fileToString(new File(dir,name2));	
+		result.second = FileHelper.fileToString(new File(dir,name2));
 
 		return result;
 	}

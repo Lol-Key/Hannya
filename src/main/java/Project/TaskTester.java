@@ -47,7 +47,9 @@ public class TaskTester {
         }
 
 	Diff result = Diff.Factory(taskDir, "user_solution.out", "model_solution.out");
-	if(result.isDifferent())throw new WrongAnwserException(result,test);
+        System.out.println(result.isDifferent());
+
+        if(result.isDifferent())throw new WrongAnwserException(result,test);
     }
 
     static void saveCode(Task task, String code) {
@@ -59,8 +61,12 @@ public class TaskTester {
     }
 
     public static void runAll(Task task, String code) throws GppCompilationException, WrongAnwserException{
-        saveCode(task, code);
-        GppFactory.compile(task.getDirectory(), "user_solution");
+        if(!FileHelper.fileToString(new File(task.getDirectory(),"user_solution.cpp")).equals(code)) {
+            System.out.println("pik pik haha :D");
+            saveCode(task, code);
+            GppFactory.compile(task.getDirectory(), "user_solution");
+        }
+
         if(!(new File(task.getDirectory(),"model_solution")).exists())GppFactory.compile(task.getDirectory(), "model_solution");
 
         File testDir = new File(task.getDirectory(), "tests");
@@ -80,8 +86,11 @@ public class TaskTester {
 	if(test == null)return;
 
         if(!(new File(task.getDirectory(),"model_solution")).exists())GppFactory.compile(task.getDirectory(), "model_solution");
+        System.out.println("file: " + FileHelper.fileToString(new File(task.getDirectory(),"user_solution.cpp")));
+        System.out.println("code: " + code);
 	if(!FileHelper.fileToString(new File(task.getDirectory(),"user_solution.cpp")).equals(code))
 	{
+        System.out.println("chujec :D");
 	    saveCode(task, code);
 	    GppFactory.compile(task.getDirectory(), "user_solution.cpp" );
 	}
@@ -89,3 +98,7 @@ public class TaskTester {
 	runOne(task, test);
     }	
 }
+//
+//#include <iostream>
+//using namespace std;
+//int main(){ cout << "Hello world";}
