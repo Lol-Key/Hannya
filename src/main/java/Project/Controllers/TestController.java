@@ -66,16 +66,18 @@ public class TestController implements Initializable {
         try{
             TaskTester.runAll(current, textFromArea);
         }catch(GppFactory.GppCompilationException gppExp){
-            System.out.println("hjkdafhkjdcs");
             stAreaRes.setText("Compilation Error");
             stAreaSolv.setText("");
             stAreaTest.setText("");
-            if(currentLevel.isMarked(0)){
-
+            if(currentLevel.isMarked(3)){
+                stcCodeArea.replaceText("");
             }
             return;
         }catch (TaskTester.WrongAnwserException ansExp){
             saveTextToAreas(ansExp);
+            if(currentLevel.isMarked(3)){
+                stcCodeArea.replaceText("");
+            }
             return;
         }
         stAreaRes.setText("OK");
@@ -98,9 +100,15 @@ public class TestController implements Initializable {
             stAreaRes.setText("Compilation Error");
             stAreaSolv.setText("");
             stAreaTest.setText("");
+            if(currentLevel.isMarked(3)){
+                stcCodeArea.replaceText("");
+            }
             return;
         }catch (TaskTester.WrongAnwserException ansExp){
             saveTextToAreas(ansExp);
+            if(currentLevel.isMarked(3)){
+                stcCodeArea.replaceText("");
+            }
             return;
         }
         stAreaRes.setText("OK");

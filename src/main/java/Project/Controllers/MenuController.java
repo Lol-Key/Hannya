@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import static Project.App.mainScene;
 import static Project.Level.currentLevel;
@@ -25,6 +26,8 @@ public class MenuController implements Initializable {
     }
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -32,12 +35,5 @@ public class MenuController implements Initializable {
 
 
 }
-//5 - pijany mode
-//4 - jeden submit
 
-//bomba
-//czasowka
 //nie korzystnaie  z bilblioteczki
-//pijany mode
-//jeden submit
-//nie mozesz testowac

@@ -122,6 +122,9 @@ public class App extends Application {
             if(currentLevel.isMarked(5) && (UP_EVENT.match(KE) || DOWN_EVENT.match(KE) || LEFT_EVENT.match(KE) || RIGHT_EVENT.match(KE))){
                 viewSwitcher.moveRandom();
             }
+            else if(currentLevel.isMarked(1) && TEST_EVENT.match(KE)){
+                return;
+            }
             else if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             } else if (UP_EVENT.match(KE)) {
@@ -162,6 +165,15 @@ public class App extends Application {
                     }
                 }, 1000);
                 TaskStatmentController.skip();
+                if(currentLevel.isMarked(2)){
+                    if(currentLevel.startedTimer){
+                        currentLevel.timer.cancel();
+                        currentLevel.startedTimer = false;
+                    }else{
+                        currentLevel.startTimer();
+                        currentLevel.startedTimer = true;
+                    }
+                }
             }
         });
     }
