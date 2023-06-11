@@ -8,7 +8,19 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TaskTester {
-    static boolean runOne(Task task, File test) {
+
+    public static class WrongAnwserException extends Exception
+    {
+	public Diff diff;
+	public File test;
+	WrongAnwserException(Diff diff_,File test_)
+	{
+	    diff=diff_;
+	    test=test_;
+	}
+    }
+
+    static void runOne(Task task, File test) throws WrongAnwserException{
         File taskDir = task.getDirectory();
 
         ProcessBuilder tester = new ProcessBuilder("./user_solution");
@@ -34,23 +46,8 @@ public class TaskTester {
         } catch (IOException | InterruptedException ignored) {
         }
 
-        ProcessBuilder diff = new ProcessBuilder("diff", "model_solution.out", "user_solution.out", "-w");
-        diff.directory(taskDir);
-
-        try {
-            System.out.println("Diffin");
-            Process diffProcess = diff.start();
-            diffProcess.waitFor();
-            BufferedReader diffOut = new BufferedReader(new InputStreamReader(diffProcess.getInputStream()));
-            while (true) {
-                String line = diffOut.readLine();
-                if (line == null) break;
-                return false;
-            }
-        } catch (IOException | InterruptedException ignored) {
-        }
-
-        return true;
+	Diff result = Diff.Factory(taskDir, "user_solution.out", "model_solution.out");
+	if(result.isDifferent())throw new WrongAnwserException(result,test);
     }
 
     static void saveCode(Task task, String code) {
@@ -61,10 +58,10 @@ public class TaskTester {
         }
     }
 
-    public static boolean runAll(Task task, String code) throws GppCompilationException {
+    public static void runAll(Task task, String code) throws GppCompilationException, WrongAnwserException{
         saveCode(task, code);
         GppFactory.compile(task.getDirectory(), "user_solution");
-        GppFactory.compile(task.getDirectory(), "model_solution");
+        if(!(new File(task.getDirectory(),"model_solution")).exists())GppFactory.compile(task.getDirectory(), "model_solution");
 
         File testDir = new File(task.getDirectory(), "tests");
         FilenameFilter filter = new FilenameFilter() {
@@ -74,11 +71,21 @@ public class TaskTester {
         };
         File[] tests = testDir.listFiles(filter);
 
-        for (int i = 0; i < Objects.requireNonNull(tests).length; i++) {
-            if (!runOne(task, tests[i])) return false;
-        }
+        for (int i = 0; i < Objects.requireNonNull(tests).length; i++)runOne(task, tests[i]);
 
-        return true;
     }
 
+    public static void userTest(Task task, String code,File test) throws GppCompilationException, WrongAnwserException
+    {
+	if(test == null)return;
+
+        if(!(new File(task.getDirectory(),"model_solution")).exists())GppFactory.compile(task.getDirectory(), "model_solution");
+	if(!FileHelper.fileToString(new File(task.getDirectory(),"user_solution.cpp")).equals(code))
+	{
+	    saveCode(task, code);
+	    GppFactory.compile(task.getDirectory(), "user_solution.cpp" );
+	}
+	
+	runOne(task, test);
+    }	
 }
