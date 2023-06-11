@@ -3,53 +3,67 @@ package Project;
 import java.io.File;
 import java.util.Random;
 
-public class Task
-{
-	static Random gen = new Random( 2137 );
-	public static Task current = new Task();
-	
-	File dir = null;
-	String statement="";
-	int timeLimit = 1500;
+public class Task {
+    static Random gen = new Random(2137);
+    public static Task current = new Task();
 
-	Task(){
-		String absolutePath = System.getProperty("user.dir");
-		String fileSeparator = System.getProperty("file.separator");
-		dir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator+ "Zadanie 1" + fileSeparator);
-	}
+    private final File dir;
+    String statement = "";
+    int timeLimit = 1500;
 
-	Task(File DIR)
-	{
-		this.dir = DIR;
-		statement = TaskInfoLoader.LoadStatment(dir);
-		timeLimit = TaskInfoLoader.loadTimeLimit(dir);
-	}
+    Task() {
+        String absolutePath = System.getProperty("user.dir");
+        String fileSeparator = System.getProperty("file.separator");
+        dir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator + "Zadanie 1" + fileSeparator);
+    }
 
-	public int getTimeLimit(){ return timeLimit; }
+    Task(File DIR) {
+        this.dir = DIR;
+        statement = TaskInfoLoader.LoadStatment(dir);
+        timeLimit = TaskInfoLoader.loadTimeLimit(dir);
+    }
 
-	public String getStatement(){ return statement; } 
+    public int getTimeLimit() {
+        return timeLimit;
+    }
 
-	public File getDirectory(){ return dir; }
+    public String getStatement() {
+        return statement;
+    }
 
-	public static Task randomTask()
-	{
-		String absolutePath = System.getProperty("user.dir");
-		String fileSeparator = System.getProperty("file.separator");
+    public File getDirectory() {
+        return dir;
+    }
 
-		System.out.println( "obtaining: " + absolutePath + fileSeparator +"res"+fileSeparator + "tasks" + fileSeparator ) ;
-		File projDir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
-		File[] candidates = projDir.listFiles();
-		
-		Task res = new Task();
-		assert candidates != null;
-		int rand = gen.nextInt()%candidates.length;
-		for (File candidate : candidates) {
-			if (candidate.isFile()) continue;
-			if (0 == rand--) continue;
-			res = new Task(candidate);
-			break;
-		}
+    public static Task randomTask() {
+        String absolutePath = System.getProperty("user.dir");
+        String fileSeparator = System.getProperty("file.separator");
 
-		return res;
-	}
+        System.out.println("obtaining: " + absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
+        File projDir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
+        File[] candidates = projDir.listFiles();
+
+        Task res = new Task();
+        assert candidates != null;
+        int rand = gen.nextInt() % candidates.length;
+        for (File candidate : candidates) {
+            if (candidate.isFile()) continue;
+            if (0 == rand--) continue;
+            res = new Task(candidate);
+            break;
+        }
+
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task c = (Task) o;
+        return (c.dir.equals(dir));
+    }
 }

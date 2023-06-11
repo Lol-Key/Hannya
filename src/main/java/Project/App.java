@@ -1,10 +1,6 @@
 package Project;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -20,15 +16,18 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App extends Application {
 
     public static Scene mainScene;
-    public static int sizeOfTasks;
+    double xOffset;
+    double yOffset;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-
+    public static boolean duringSwitching = false;
+    public static boolean fullyLoaded = false;
     public static Parent currentRoot;
     public static Parent codeEditorRoot;
     public static Parent showTaskRoot;
@@ -40,16 +39,16 @@ public class App extends Application {
         showTaskRoot = loadFXML("ShowText");
         rootGroup = new Group(codeEditorRoot, showTaskRoot);
         stage.initStyle(StageStyle.UNDECORATED);
-        /*
-        currentRoot.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        currentRoot.setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });*/
-        Image img = new Image(App.class.getResource("loadingScreen.jpg").toExternalForm());
+
+//        showTaskRoot.setOnMousePressed(event -> {
+//            xOffset = event.getSceneX();
+//            yOffset = event.getSceneY();
+//        });
+//        showTaskRoot.setOnMouseDragged(event -> {
+//            stage.setX(event.getScreenX() - xOffset);
+//            stage.setY(event.getScreenY() - yOffset);
+//        });
+        Image img = new Image(Objects.requireNonNull(App.class.getResource("newLoadingScreen.jpg")).toExternalForm());
         ImageView imgView = new ImageView(img);
         ImageView imgView2 = new ImageView(img);
         imgView.setBlendMode(BlendMode.MULTIPLY);
@@ -67,34 +66,56 @@ public class App extends Application {
         ft.setCycleCount(1000 * 1000);
         ft.setAutoReverse(true);
         ft.play();
-        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
-            if (loadingRoot == mainScene.getRoot()) {
-                ft.stop();
-                double reachedOpacity = imgView.opacityProperty().doubleValue();
-                FadeTransition ft2 = new FadeTransition(Duration.millis(3000 * reachedOpacity), imgView);
-                ft2.setFromValue(reachedOpacity);
-                ft2.setToValue(0.0);
-                ft2.play();
-                ft2.setOnFinished(t -> {
-                    quitLoadingScreen();
-                });
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                quitSession(loadingRoot, ft, imgView);
             }
+        }, 2500);
+
+        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
+            quitSession(loadingRoot, ft, imgView);
         });
         stage.show();
+    }
+
+    private void quitSession(Group loadingRoot, FadeTransition ft, ImageView imgView) {
+        if (loadingRoot == mainScene.getRoot()) {
+            ft.stop();
+            double reachedOpacity = imgView.opacityProperty().doubleValue();
+            FadeTransition ft2 = new FadeTransition(Duration.millis(3000 * reachedOpacity), imgView);
+            ft2.setFromValue(reachedOpacity);
+            ft2.setToValue(0.0);
+            ft2.play();
+            ft2.setOnFinished(t -> {
+                quitLoadingScreen();
+            });
+        }
     }
 
     private void quitLoadingScreen() {
         mainScene.setRoot(rootGroup);
         showTaskRoot.translateXProperty().set(mainScene.getWidth());
         currentRoot = codeEditorRoot;
-        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE ->  {
+        mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             }
-            if (KE.getCode() == KeyCode.ALT) {
-                loadSecond();
+            if (KE.getCode() == KeyCode.ALT && fullyLoaded) {
+                if (!duringSwitching) {
+                    duringSwitching = true;
+                    loadSecond();
+                }
             }
         });
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                fullyLoaded = true;
+            }
+        }, 1000);
     }
 
     void loadSecond() {
@@ -102,13 +123,14 @@ public class App extends Application {
         double showTaskPos = 0.0;
         if (currentRoot == codeEditorRoot) {
             showTaskRoot.translateXProperty().set(mainScene.getWidth());
-            codeEditorPos = - mainScene.getWidth();
+            codeEditorPos = -mainScene.getWidth();
             currentRoot = showTaskRoot;
         } else {
             codeEditorRoot.translateXProperty().set(-mainScene.getWidth());
             showTaskPos = mainScene.getWidth();
             currentRoot = codeEditorRoot;
         }
+
         sceneTranslation(codeEditorPos, showTaskPos);
     }
 
@@ -120,10 +142,18 @@ public class App extends Application {
         KeyValue kv2 = new KeyValue(showTaskRoot.translateXProperty(), showTaskPos, Interpolator.EASE_OUT);
         KeyFrame kf2 = new KeyFrame(Duration.seconds(0.3), kv2);
         timeline.getKeyFrames().add(kf2);
+
         timeline.play();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                duringSwitching = false;
+            }
+        }, 300);
     }
 
     public static Parent loadFXML(String fxml) throws IOException {
-        return FXMLLoader.load(App.class.getResource(fxml + ".fxml"));
+        return FXMLLoader.load(Objects.requireNonNull(App.class.getResource(fxml + ".fxml")));
     }
 }
