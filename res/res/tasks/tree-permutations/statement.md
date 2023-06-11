@@ -1,0 +1,17 @@
+## Tree permutations
+
+Given a tree, we define the distance between two permutations A and B as the sum of distances between nodes A[i] and B[i] over all i.
+Compute the largest distance between any two permutations for a given tree with N nodes.
+
+### Input:
+The first line in a testcase contains the number of nodes in the tree N (**1 <= N <= 1000 000**).
+The second line contains N - 1 integers. The i'th integer denotes the parent of the i + 1'st node.
+The tree is guaranteed to be rooted in node 1, and the label of each node's parent is smaller than the node's label.
+
+##
+### Sample test
+ input | output
+ --- | ---
+4 | 6
+1 1 1 |
+
