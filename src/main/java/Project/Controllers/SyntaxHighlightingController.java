@@ -168,19 +168,39 @@ public class SyntaxHighlightingController {
         });
     }
 
-    private String getTypedText(boolean changeCommitted) {
+    private String getTypedText(boolean changeCommitted, boolean viewOnly) {
         int caretPosition = codeArea.getCaretPosition();
         int removedBeforeCaretPosition = 0;
         StringBuilder textBuilder = new StringBuilder();
         String codeAreaText = codeArea.getText();
-        for (int i = 0; i < codeAreaText.length(); ++i)
-            if (changeCommitted || !codeArea.getStyleOfChar(i).contains("suggestion"))
+        int lastComittedPosition = -1;
+        for (int i = 0; i < codeAreaText.length(); ++i) {
+            boolean remove = false;
+            if (codeArea.getStyleOfChar(i).contains("suggestion")) {
+                if (!changeCommitted)
+                    remove = true;
+            } else if (codeArea.getStyleOfChar(i).contains("fakesuggestion"))
+                remove = true;
+            if (!remove) {
                 textBuilder.append(codeAreaText.charAt(i));
+                if (changeCommitted && codeArea.getStyleOfChar(i).contains("suggestion"))
+                    lastComittedPosition = textBuilder.length();
+            }
             else if (i <= caretPosition)
                 ++removedBeforeCaretPosition;
+        }
         caretPosition -= removedBeforeCaretPosition;
-        codeArea.moveTo(caretPosition);
+        if (!viewOnly) {
+            if (lastComittedPosition == -1)
+                codeArea.moveTo(caretPosition);
+            else
+                codeArea.moveTo(lastComittedPosition - 1);
+        }
         return textBuilder.toString();
+    }
+
+    private String getText() {
+        return getTypedText(false, false);
     }
 
     int stringDistance(String a, String b) {
@@ -211,7 +231,7 @@ public class SyntaxHighlightingController {
 
     String getClosestSuggestionMatch(String suggestion) {
         if (suggestion.length() == 0)
-            return "Search for an algorithm or data structure" + System.lineSeparator();
+            return null;
         String res = null;
         int distance = 0;
         for (String key : TAGS.keySet()) {
@@ -226,7 +246,7 @@ public class SyntaxHighlightingController {
 
     @FXML
     public void refreshSyntaxHighlighting(boolean changeCommitted) {
-        String text = getTypedText(changeCommitted);
+        String text = getTypedText(changeCommitted, false);
         int caretPosition = codeArea.getCaretPosition();
         StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
         int ptr = 0;
@@ -298,14 +318,17 @@ public class SyntaxHighlightingController {
                                     if (!Character.isWhitespace(text.charAt(j)))
                                         suggestion.append(text.charAt(j));
                                 String suggestedAlgorithm = getClosestSuggestionMatch(suggestion.toString());
-                                if (suggestedAlgorithm != null) {
-                                    StringBuilder newTextBuilder = new StringBuilder(text);
-                                    newTextBuilder.insert(lineEnd, suggestedAlgorithm);
-                                    text = newTextBuilder.toString();
-                                    spansBuilder.add(Collections.singleton("suggestion"), suggestedAlgorithm.length());
-                                    lineEnd += suggestedAlgorithm.length();
-                                    lastIntervalEnd = lineEnd;
+                                String suggestionStyle = "suggestion";
+                                if (suggestedAlgorithm == null) {
+                                    suggestedAlgorithm = "Search for an algorithm or data structure" + System.lineSeparator();
+                                    suggestionStyle = "fakesuggestion";
                                 }
+                                StringBuilder newTextBuilder = new StringBuilder(text);
+                                newTextBuilder.insert(lineEnd, suggestedAlgorithm);
+                                text = newTextBuilder.toString();
+                                spansBuilder.add(Collections.singleton(suggestionStyle), suggestedAlgorithm.length());
+                                lineEnd += suggestedAlgorithm.length();
+                                lastIntervalEnd = lineEnd;
                             }
                             break;
                         }

@@ -42,6 +42,10 @@
 	-fx-fill: #D8D8F0;
 }
 
+.styled-text-area .fakesuggestion {
+	-fx-fill: #D8D8F0;
+}
+
 .styled-text-area .normal {
 	-fx-fill: #FCF0CC;
 }
