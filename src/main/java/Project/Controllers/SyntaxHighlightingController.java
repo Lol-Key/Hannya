@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 
 public class SyntaxHighlightingController {
 
+    private boolean suggestionsActive;
+
     @FXML
     private CodeArea codeArea;
 
@@ -130,6 +132,7 @@ public class SyntaxHighlightingController {
 
     @FXML
     private void initialize(String text) {
+        suggestionsActive = true;
         codeArea.requestFollowCaret();
         codeArea.getStylesheets().add(Objects.requireNonNull(SyntaxHighlightingController.class.getResource("cpp-keywords.css")).toExternalForm());
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
@@ -312,7 +315,7 @@ public class SyntaxHighlightingController {
                                     ++nextLineChars;
                                 ++nextLineEnd;
                             }
-                            if (nextLineChars == 0 && caretPosition >= i + 3 && caretPosition < lineEnd && i + 2 < lineEnd && text.charAt(i + 2) == '/') {
+                            if (suggestionsActive && nextLineChars == 0 && caretPosition >= i + 3 && caretPosition < lineEnd && i + 2 < lineEnd && text.charAt(i + 2) == '/') {
                                 StringBuilder suggestion = new StringBuilder();
                                 for (int j = i + 3; j < lineEnd; ++j)
                                     if (!Character.isWhitespace(text.charAt(j)))
@@ -358,5 +361,13 @@ public class SyntaxHighlightingController {
         codeArea.moveTo(caretPosition);
         if (text.length() != 0)
             codeArea.setStyleSpans(0, spansBuilder.create());
+    }
+
+    public void disableSuggestions() {
+        suggestionsActive = false;
+    }
+
+    public void enableSuggestions() {
+        suggestionsActive = true;
     }
 }
