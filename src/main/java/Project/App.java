@@ -1,6 +1,6 @@
 package Project;
 
-import Project.Controllers.TaskStatmentController;
+import Project.Controllers.TaskStatementController;
 import Project.Controllers.TestController;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -76,7 +76,7 @@ public class App extends Application {
 
         // Populating scenes (MUST be after scene loaded)
         viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, loadFXML("Menu"), 1, 0, "Menu");
-        viewSwitcherBuilder.addScene(loadFXML("TaskStatment"), 2, 1, "TaskStatment");
+        viewSwitcherBuilder.addScene(loadFXML("TaskStatement"), 2, 1, "TaskStatement");
         viewSwitcherBuilder.addScene(loadFXML("Test"), 0, 1, "Test");
         viewSwitcherBuilder.addScene(loadFXML("CodeEditor"), 1, 1, "CodeEditor");
 
@@ -164,7 +164,7 @@ public class App extends Application {
                         duringSkip = false;
                     }
                 }, 1000);
-                TaskStatmentController.skip();
+                TaskStatementController.skip();
                 if(currentLevel.isMarked(2)){
                     if(currentLevel.startedTimer){
                         currentLevel.timer.cancel();

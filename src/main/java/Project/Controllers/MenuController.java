@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 
 import static Project.App.mainScene;
+import static Project.Controllers.CodeEditorController.syntaxHighlightingController;
 import static Project.Level.currentLevel;
 
 public class MenuController implements Initializable {
@@ -23,10 +24,14 @@ public class MenuController implements Initializable {
         if(idx-1 == 4 && currentLevel.isMarked(4)){
             currentLevel.submit = false;
         }
+        if(idx-1 == 0 && currentLevel.isMarked(0)){
+            syntaxHighlightingController.disableSuggestions();
+        }
+        if(idx-1 == 0 && !currentLevel.isMarked(0)){
+            syntaxHighlightingController.enableSuggestions();
+        }
+
     }
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,4 +41,3 @@ public class MenuController implements Initializable {
 
 }
 
-//nie korzystnaie  z bilblioteczki

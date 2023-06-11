@@ -1,6 +1,6 @@
 package Project;
 
-import Project.Controllers.TaskStatmentController;
+import Project.Controllers.TaskStatementController;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class Level {
             @Override
             public void run() {
                 startedTimer = false;
-                TaskStatmentController.skip();
+                TaskStatementController.skip();
             }
         }, 900000);
     }
