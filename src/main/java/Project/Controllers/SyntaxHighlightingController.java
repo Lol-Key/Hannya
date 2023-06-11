@@ -75,7 +75,15 @@ public class SyntaxHighlightingController {
             "typedef",
             "typename",
             "using",
-            "volatile"
+            "volatile",
+            "vector",
+            "string",
+            "array",
+            "pair",
+            "queue",
+            "stack",
+            "priority_queue",
+            "tuple"
     ));
 
     private static Map<String, String> parseTags() {
@@ -185,7 +193,7 @@ public class SyntaxHighlightingController {
             c.set(0, old + 1);
             for (int j = 1; j <= a.length(); ++j) {
                 int tmp = c.get(j);
-                if (b.charAt(i) == a.charAt(j - 1))
+                if (Character.toLowerCase(b.charAt(i)) == Character.toLowerCase(a.charAt(j - 1)))
                     c.set(j, old);
                 else {
                     if (tmp < old)

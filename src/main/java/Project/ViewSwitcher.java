@@ -10,6 +10,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.GaussianBlur;
 
 public class ViewSwitcher {
 
@@ -61,27 +63,31 @@ public class ViewSwitcher {
 
             newScene.getRoot().translateXProperty().set(-xChange * scene.getWidth());
             newScene.getRoot().translateYProperty().set(-yChange * scene.getHeight());
+            scene.getRoot().setEffect(new BoxBlur());
 
             Timeline timeline = new Timeline();
+            
+            double transitionDuration = 0.3;
 
             KeyValue newSceneXKeyValue = new KeyValue(newScene.getRoot().translateXProperty(), 0, Interpolator.EASE_OUT);
             KeyValue newSceneYKeyValue = new KeyValue(newScene.getRoot().translateYProperty(), 0, Interpolator.EASE_OUT);
-            KeyFrame newSceneXKeyFrame = new KeyFrame(Duration.seconds(0.3), newSceneXKeyValue);
-            KeyFrame newSceneYKeyFrame = new KeyFrame(Duration.seconds(0.3), newSceneYKeyValue);
+            KeyFrame newSceneXKeyFrame = new KeyFrame(Duration.seconds(transitionDuration), newSceneXKeyValue);
+            KeyFrame newSceneYKeyFrame = new KeyFrame(Duration.seconds(transitionDuration), newSceneYKeyValue);
 
             timeline.getKeyFrames().add(newSceneXKeyFrame);
             timeline.getKeyFrames().add(newSceneYKeyFrame);
             
             KeyValue currentSceneXKeyValue = new KeyValue(currentScene.getRoot().translateXProperty(), xChange * scene.getWidth(), Interpolator.EASE_OUT);
             KeyValue currentSceneYKeyValue = new KeyValue(currentScene.getRoot().translateYProperty(), yChange * scene.getHeight(), Interpolator.EASE_OUT);
-            KeyFrame currentSceneXKeyFrame = new KeyFrame(Duration.seconds(0.3), currentSceneXKeyValue);
-            KeyFrame currentSceneYKeyFrame = new KeyFrame(Duration.seconds(0.3), currentSceneYKeyValue);
+            KeyFrame currentSceneXKeyFrame = new KeyFrame(Duration.seconds(transitionDuration), currentSceneXKeyValue);
+            KeyFrame currentSceneYKeyFrame = new KeyFrame(Duration.seconds(transitionDuration), currentSceneYKeyValue);
 
             timeline.getKeyFrames().add(currentSceneXKeyFrame);
             timeline.getKeyFrames().add(currentSceneYKeyFrame);
 
             timeline.setOnFinished(t -> {
                 finalizeSwitch();
+                scene.getRoot().setEffect(null);
             });
 
             timeline.play();
