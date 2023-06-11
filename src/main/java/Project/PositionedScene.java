@@ -7,8 +7,10 @@ public class PositionedScene {
     private Parent root;
     private int xPosition;
     private int yPosition;
+    private String name;
 
-    PositionedScene(Parent root, int xPosition, int yPosition) {
+    PositionedScene(Parent root, int xPosition, int yPosition, String name) {
+        this.name = name;
         this.root = root;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -24,5 +26,9 @@ public class PositionedScene {
 
     public int getY() {
         return yPosition;
+    }
+    
+    public String toString() {
+        return name;
     }
 }

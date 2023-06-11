@@ -3,15 +3,11 @@ package Project.Controllers;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static Project.App.fullyLoaded;
 import static Project.App.mainScene;
 import static Project.Level.currentLevel;
 

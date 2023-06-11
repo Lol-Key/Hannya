@@ -17,6 +17,8 @@ public class ViewSwitcher {
 
     private Scene scene;
 
+    private boolean finalized = true;
+
     private PositionedScene currentScene;
 
     private Group positionedSceneGroup;
@@ -39,8 +41,16 @@ public class ViewSwitcher {
         rng = new Random(System.currentTimeMillis());
     }
 
+    private void finalizeSwitch() {
+        finalized = true;
+    }
+
     private void switchView(PositionedScene newScene, int xChange, int yChange) {
+        if (!finalized)
+            return;
+        finalized = false;
         System.out.println("Switching scenes : X(" + xChange + ") Y(" + yChange + ")");
+        System.out.println("Going from" + currentScene + " to " + newScene);
         for (PositionedScene positionedScene : positionedScenes)
             if (positionedScene.getRoot() != currentScene.getRoot() &&
                 positionedScene.getRoot() != newScene.getRoot()
@@ -69,6 +79,10 @@ public class ViewSwitcher {
 
             timeline.getKeyFrames().add(currentSceneXKeyFrame);
             timeline.getKeyFrames().add(currentSceneYKeyFrame);
+
+            timeline.setOnFinished(t -> {
+                finalizeSwitch();
+            });
 
             timeline.play();
 
@@ -172,8 +186,6 @@ public class ViewSwitcher {
                 yChange = -1;
             }
             switchView(positionedScenes.get(position), xChange, yChange);
-        } else {
-            System.out.println("kutas");
         }
     }
 }

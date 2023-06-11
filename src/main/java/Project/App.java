@@ -28,10 +28,6 @@ public class App extends Application {
     double xOffset;
     double yOffset;
 
-    public static boolean duringSwitching = false;
-    public static boolean fullyLoaded = false;
-    public static Parent codeEditorRoot;
-    public static Parent showTaskRoot;
     public static ViewSwitcher viewSwitcher;
     public static ViewSwitcherBuilder viewSwitcherBuilder;
 
@@ -60,10 +56,10 @@ public class App extends Application {
         mainScene = new Scene(loadingRoot);
 
         // Populating scenes (MUST be after scene loaded)
-        codeEditorRoot = loadFXML("CodeEditor");
-        showTaskRoot = loadFXML("TaskStatment");
-        viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, codeEditorRoot, 0, 0);
-        viewSwitcherBuilder.addScene(showTaskRoot, 1, 0);
+        viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, loadFXML("CodeEditor"), 1, 1, "CodeEditor");
+        viewSwitcherBuilder.addScene(loadFXML("TaskStatment"), 2, 1, "TaskStatment");
+        viewSwitcherBuilder.addScene(loadFXML("Test"), 0, 1, "Test");
+        viewSwitcherBuilder.addScene(loadFXML("Menu"), 1, 0, "Menu");
 
         mainScene.setRoot(loadingRoot);
         stage.setScene(mainScene);
@@ -78,13 +74,6 @@ public class App extends Application {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(7000),new KeyValue(howItGo.volumeProperty(), 1)));
         howItGo.play();
         timeline.play();
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                quitSession(loadingRoot, ft, imgView, howItGo);
-//            }
-//        }, 2500);
 
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
             quitSession(loadingRoot, ft, imgView, howItGo);
@@ -114,20 +103,10 @@ public class App extends Application {
             if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             }
-            if (KE.getCode() == KeyCode.ALT /*&& fullyLoaded*/) {
-                if (!duringSwitching) {
-                    //duringSwitching = true;
-                    viewSwitcher.moveRandom();
-                }
+            if (KE.getCode() == KeyCode.ALT) {
+                viewSwitcher.moveRandom();
             }
         });
-        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                fullyLoaded = true;
-//            }
-//        }, 1000);
     }
 
     public static Parent loadFXML(String fxml) throws IOException {

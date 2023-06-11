@@ -17,15 +17,15 @@ public class ViewSwitcherBuilder {
 
     private ArrayList<PositionedScene> positionedScenes;
 
-    public ViewSwitcherBuilder(Scene scene, Parent root, int xPosition, int yPosition) {
+    public ViewSwitcherBuilder(Scene scene, Parent root, int xPosition, int yPosition, String rootName) {
         this.scene = scene;
-        defaultScene = new PositionedScene(root, xPosition, yPosition);
+        defaultScene = new PositionedScene(root, xPosition, yPosition, rootName);
         positionedScenes = new ArrayList<PositionedScene>();
         positionedScenes.add(defaultScene);
     }
 
-    public void addScene(Parent root, int xPosition, int yPosition) {
-        positionedScenes.add(new PositionedScene(root, xPosition, yPosition));
+    public void addScene(Parent root, int xPosition, int yPosition, String rootName) {
+        positionedScenes.add(new PositionedScene(root, xPosition, yPosition, rootName));
     }
 
     public ViewSwitcher build() {
