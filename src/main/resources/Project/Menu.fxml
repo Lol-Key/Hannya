@@ -34,12 +34,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                         <JFXToggleButton fx:id="tgButtonF1" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF1" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="0" />
-                         <JFXToggleButton fx:id="tgButtonF2" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF2" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="1" />
-                         <JFXToggleButton fx:id="tgButtonF3" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF3" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="2" />
-                         <JFXToggleButton fx:id="tgButtonF4" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF4" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="3" />
-                         <JFXToggleButton fx:id="tgButtonF5" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF5" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="4" />
-                         <JFXToggleButton fx:id="tgButtonF6" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onF6" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="5" />
+                         <JFXToggleButton fx:id="tgButtonF1" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="0" />
+                         <JFXToggleButton fx:id="tgButtonF2" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="1" />
+                         <JFXToggleButton fx:id="tgButtonF3" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="2" />
+                         <JFXToggleButton fx:id="tgButtonF4" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="3" />
+                         <JFXToggleButton fx:id="tgButtonF5" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="4" />
+                         <JFXToggleButton fx:id="tgButtonF6" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onFKey" stylesheets="@css/colorSchemeMenu.css" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>

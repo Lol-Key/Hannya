@@ -2,36 +2,35 @@ package Project.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Project.App.fullyLoaded;
+import static Project.App.mainScene;
+import static Project.Level.currentLevel;
+
 public class MenuController implements Initializable {
     public VBox anchorRoot;
 
-    public void onF1() {
+    public void onFKey(ActionEvent event){
+        Button bt = (Button) event.getSource();
+        String st = bt.getId();
+        int idx = st.charAt(st.length()-1) - '0';
+        currentLevel.switchLvl(idx-1);
     }
 
-    public void onF2( ) {
-    }
-
-    public void onF3( ) {
-    }
-
-    public void onF4( ) {
-    }
-
-    public void onF5( ) {
-    }
-
-    public void onF6( ) {
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
 }
 
 
