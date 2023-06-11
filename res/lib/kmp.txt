@@ -1,8 +1,8 @@
 kmp
-text
-string
 pattern
-pref-suf
+prefsuf
+string
+text
 END_OF_TAGS
 vector<int> pi(const string& s) {
 	vector<int> p( s.size());
