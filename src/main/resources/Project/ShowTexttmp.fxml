@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="parentContainer" stylesheets="@css/defaultColorScheme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.ShowTaskController">
+<AnchorPane fx:id="parentContainer" stylesheets="@css/defaultColorScheme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.TaskStatmentController">
    <children>
       <VBox fx:id="anchorRoot" stylesheets="@css/defaultColorScheme.css">
          <children>

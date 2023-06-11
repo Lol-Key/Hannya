@@ -17,6 +17,7 @@
   -fx-padding: 8;
   -fx-border-color: -mdfx-border-color-1;
   -fx-border-width: 2;
+
  }
 .markdown-table-table {
   -fx-width: -1;
@@ -26,6 +27,7 @@
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-family: 'Roboto Mono', monospace;
     -fx-font-size: 13pt;
+
  }
  .markdown-italic {
    -fx-font-style: italic;

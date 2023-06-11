@@ -14,6 +14,6 @@ public class PopUpController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        labelResult.setText(ShowTaskController.error);
+        labelResult.setText(TaskStatmentController.error);
     }
 }
