@@ -33,7 +33,6 @@ public class ViewSwitcherBuilder {
         for (PositionedScene positionedScene : positionedScenes)
             positionedSceneRoots.add(positionedScene.getRoot());
         Group positionedSceneGroup = new Group(positionedSceneRoots);
-        ViewSwitcher viewSwitcher = new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes);
-        return viewSwitcher;
+        return new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes);
     }
 }
