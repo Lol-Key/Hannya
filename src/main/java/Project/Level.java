@@ -7,8 +7,10 @@ public class Level {
     public static Level currentLevel = new Level();
     public ArrayList<Boolean> lvls;
 
+    public boolean submit;
     Level(){
         lvls = new ArrayList<>(6);
+        submit = false;
         lvls.addAll(Collections.nCopies(6, Boolean.FALSE));
     }
 

@@ -26,6 +26,8 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static Project.Level.currentLevel;
+
 public class App extends Application {
 
     public static Scene mainScene;
@@ -117,7 +119,10 @@ public class App extends Application {
     private void quitLoadingScreen() {
         viewSwitcher = viewSwitcherBuilder.build();
         mainScene.addEventFilter(KeyEvent.KEY_RELEASED, KE -> {
-            if (KE.getCode() == KeyCode.ESCAPE) {
+            if(currentLevel.isMarked(5) && (UP_EVENT.match(KE) || DOWN_EVENT.match(KE) || LEFT_EVENT.match(KE) || RIGHT_EVENT.match(KE))){
+                viewSwitcher.moveRandom();
+            }
+            else if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
             } else if (UP_EVENT.match(KE)) {
                 viewSwitcher.moveUp();
@@ -138,7 +143,7 @@ public class App extends Application {
                 }, 1000);
                 TestController.submit();
             } else if (TEST_EVENT.match(KE) && !duringTest) {
-                duringCompile = true;
+                duringTest = true;
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -148,7 +153,7 @@ public class App extends Application {
                 }, 1000);
                 TestController.test();
             }else if (SKIP_EVENT.match(KE) && !duringSkip){
-                duringCompile = true;
+                duringSkip = true;
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override

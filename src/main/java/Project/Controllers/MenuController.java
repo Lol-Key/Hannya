@@ -19,6 +19,9 @@ public class MenuController implements Initializable {
         String st = bt.getId();
         int idx = st.charAt(st.length()-1) - '0';
         currentLevel.switchLvl(idx-1);
+        if(idx-1 == 4 && currentLevel.isMarked(4)){
+            currentLevel.submit = false;
+        }
     }
 
 
@@ -29,8 +32,8 @@ public class MenuController implements Initializable {
 
 
 }
-
-
+//5 - pijany mode
+//4 - jeden submit
 
 //bomba
 //czasowka
