@@ -38,7 +38,7 @@
                      <children>
                         <JFXButton fx:id="buttonRun" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onRun" stylesheets="@css/defaultColorScheme.css" text="run tests" />
                         <JFXButton fx:id="buttonSkip" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onSkip" stylesheets="@css/defaultColorScheme.css" text="next problem" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="buttonNieWiem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onNieWiem" stylesheets="@css/defaultColorScheme.css" text="change view" GridPane.rowIndex="2" />
+                        <JFXButton fx:id="buttonNieWiem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"  stylesheets="@css/defaultColorScheme.css" text="change view" GridPane.rowIndex="2" />
                         <JFXToggleButton fx:id="toggleButton1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onSwitch1" stylesheets="@css/defaultColorScheme.css" text="mode 1" GridPane.rowIndex="3" />
                         <JFXToggleButton fx:id="toggleButton2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onSwitch2" stylesheets="@css/defaultColorScheme.css" text="mode 2" GridPane.rowIndex="4" />
                         <Label fx:id="labelTaskName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@css/defaultColorScheme.css" text="task name" GridPane.rowIndex="5" />

@@ -21,30 +21,36 @@
     -fx-background-radius: 0;
 }
 
-.button {
+.jfx-button {
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-family: 'Roboto Mono', monospace;
     -fx-font-size: 13pt;
     -fx-background-color: #001A23;
     -fx-text-fill: #FCF0CC;
-}
-
-.button .content {
     -fx-background-radius: 0;
+
 }
 
-.toggle-button {
+.jfx-button .content {
+    -fx-background-radius: 0;
+    -fx-background-color: #001A23;
+}
+
+.jfx-toggle-button {
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-family: 'Roboto Mono', monospace;
     -fx-font-size: 13pt;
     -fx-background-color: #001A23;
     -fx-text-fill: #FCF0CC;
+    -fx-background-radius: 0;
+
 }
 
-.togle-button .content {
+.jfx-toggle-button .content {
     -fx-background-radius: 0;
+    -fx-background-color: #001A23;
 }
 
 .label {
@@ -58,6 +64,7 @@
 
 .label .content {
     -fx-background-radius: 0;
+    -fx-background-color: #001A23;
 }
 
 .grid-pane {
