@@ -1,0 +1,21 @@
+#back{
+    -fx-background-image: url("stats.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+.label {
+    -fx-text-align: center;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: 'Roboto Mono', monospace;
+    -fx-font-size: 23pt;
+    -fx-background-color: transparent;
+    -fx-text-fill: #001A23;
+}
+
+.label .content {
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+

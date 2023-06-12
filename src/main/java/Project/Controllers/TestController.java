@@ -7,17 +7,14 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
-import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
 import java.net.URL;
-import java.security.PublicKey;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static Project.Controllers.CodeEditorController.stcCodeArea;
-import static Project.Controllers.CodeEditorController.text;
 import static Project.Level.currentLevel;
 import static Project.Task.current;
 
@@ -54,7 +51,7 @@ public class TestController implements Initializable {
                             duringSkip = false;
                         }
                     }, 1000);
-                    TaskStatmentController.skip();
+                    TaskStatementController.skip();
                 }
                 return;
             }

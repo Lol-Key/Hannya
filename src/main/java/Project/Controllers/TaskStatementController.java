@@ -1,38 +1,23 @@
 package Project.Controllers;
 
 import Project.App;
-import Project.GppFactory;
 import Project.Task;
-import Project.TaskTester;
-import com.jfoenix.controls.JFXToggleButton;
 import com.sandec.mdfx.MarkdownView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static Project.Level.currentLevel;
 import static Project.Task.current;
-import static javafx.scene.input.KeyCode.ESCAPE;
 
 
-public class TaskStatmentController implements Initializable {
+public class TaskStatementController implements Initializable {
 
     @FXML
     private VBox anchorRoot;
