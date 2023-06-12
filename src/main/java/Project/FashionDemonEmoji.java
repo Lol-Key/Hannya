@@ -23,13 +23,13 @@ public class FashionDemonEmoji extends Emoji
 
 		okView = new ImageView(ansImage);
 		demonView = new ImageView(funiImage);
-		
+		afterView = new ImageView(funiImage);
 
-        	okView.setTranslateX(400);
-        	okView.setTranslateY(400);
+        	okView.setTranslateX(190);
+        	okView.setTranslateY(270);
 
-		okView.setFitHeight(180);
-		okView.setFitWidth(300);
+		okView.setFitHeight(100);
+		okView.setFitWidth(200);
 
 		ArrayList<Node> temp = new ArrayList<Node>();
 		temp.add(demonView);
@@ -38,8 +38,8 @@ public class FashionDemonEmoji extends Emoji
 
 		elements = new Group(temp);
 
-		x=100;
-		y=-100;
+		x=350;
+		y=70;
 	}
 
 	@Override

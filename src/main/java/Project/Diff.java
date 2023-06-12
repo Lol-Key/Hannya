@@ -21,7 +21,7 @@ public class Diff
 	{
 		Diff result = new Diff();
 		result.different = false;
-
+		//System.out.println(dir + " " + name1 + " " + name2);
 		ProcessBuilder diff = new ProcessBuilder("diff", name1, name2, "-w");
 		diff.directory(dir);
 		try {

@@ -92,6 +92,7 @@ public class TestController implements Initializable {
         }
         StatController.incrementSuccessfulSubmissions();
         StatController.incrementSolvedTasks(FileHelper.fileToString(current.getDirectory()));
+        viewSwitcher.showEmojiByIndex(1);
         stAreaRes.setText("OK");
         stAreaSolv.setText("");
         stAreaTest.setText("");

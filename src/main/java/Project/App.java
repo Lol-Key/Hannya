@@ -86,7 +86,7 @@ public class App extends Application {
 	
 	// Emojis
 	viewSwitcherBuilder.addEmoji(new CryingLaughingEmoji());
-
+    viewSwitcherBuilder.addEmoji(new FashionDemonEmoji());
         mainScene.setRoot(loadingRoot);
         stage.setScene(mainScene);
         FadeTransition ft = new FadeTransition(Duration.millis(3000), imgView);
