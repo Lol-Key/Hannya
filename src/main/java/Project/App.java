@@ -111,13 +111,14 @@ public class App extends Application {
         if (loadingRoot == mainScene.getRoot()) {
             ft.stop();
             double reachedOpacity = imgView.opacityProperty().doubleValue();
-            FadeTransition ft2 = new FadeTransition(Duration.millis(7000 * reachedOpacity), imgView);
+            FadeTransition ft2 = new FadeTransition(Duration.millis(5000 * reachedOpacity), imgView);
             ft2.setFromValue(reachedOpacity);
             ft2.setToValue(0.0);
-            Timeline timeline2 = new Timeline(new KeyFrame(Duration.millis(5000),new KeyValue(howItGo.volumeProperty(), 0)));
+            Timeline timeline2 = new Timeline(new KeyFrame(Duration.millis(7000 * reachedOpacity),new KeyValue(howItGo.volumeProperty(), 0)));
             timeline2.play();
             ft2.play();
-            ft2.setOnFinished(t -> {
+            timeline2.setOnFinished(t -> {
+                howItGo.stop();
                 quitLoadingScreen();
             });
         }
