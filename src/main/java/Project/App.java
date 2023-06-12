@@ -81,6 +81,7 @@ public class App extends Application {
         viewSwitcherBuilder.addScene(loadFXML("TaskStatement"), 2, 1, "TaskStatement");
         viewSwitcherBuilder.addScene(loadFXML("Test"), 0, 1, "Test");
         viewSwitcherBuilder.addScene(loadFXML("CodeEditor"), 1, 1, "CodeEditor");
+        viewSwitcherBuilder.addScene(loadFXML("Stats"), 1, 2, "Stats");
 	
 	// Emojis
 	viewSwitcherBuilder.addEmoji(new CryingLaughingEmoji());

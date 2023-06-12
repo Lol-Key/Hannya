@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@700&display=swap');
+
 #back{
     -fx-background-image: url("stats.jpg");
     -fx-background-size: cover;
@@ -8,9 +10,9 @@
     -fx-text-align: center;
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-family: 'Roboto Mono', monospace;
-    -fx-font-size: 23pt;
+    -fx-font-size: 55pt;
     -fx-background-color: transparent;
-    -fx-text-fill: #001A23;
+    -fx-text-fill: #005D7C;
 }
 
 .label .content {
