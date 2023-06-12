@@ -17,10 +17,13 @@ public class ViewSwitcherBuilder {
 
     private ArrayList<PositionedScene> positionedScenes;
 
+    private ArrayList<Emoji> emojis; //flubbed
+
     public ViewSwitcherBuilder(Scene scene, Parent root, int xPosition, int yPosition, String rootName) {
         this.scene = scene;
         defaultScene = new PositionedScene(root, xPosition, yPosition, rootName);
         positionedScenes = new ArrayList<PositionedScene>();
+	emojis = new ArrayList<Emoji>(); //flubbed
         positionedScenes.add(defaultScene);
     }
 
@@ -28,12 +31,19 @@ public class ViewSwitcherBuilder {
         positionedScenes.add(new PositionedScene(root, xPosition, yPosition, rootName));
     }
 
+    public void addEmoji(Emoji it) // flubbed
+    {
+	emojis.add(it);
+    }
+
     public ViewSwitcher build() {
         Collection<Node> positionedSceneRoots = new LinkedList<Node>();
         for (PositionedScene positionedScene : positionedScenes)
             positionedSceneRoots.add(positionedScene.getRoot());
+	for (Emoji emoji : emojis)
+	    positionedSceneRoots.add(emoji.elements);
         Group positionedSceneGroup = new Group(positionedSceneRoots);
-        ViewSwitcher viewSwitcher = new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes);
+        ViewSwitcher viewSwitcher = new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes , emojis); //flubbed
         return viewSwitcher;
     }
 }

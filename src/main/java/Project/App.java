@@ -49,6 +49,8 @@ public class App extends Application {
     final KeyCombination TEST_EVENT = new KeyCodeCombination(KeyCode.T, KeyCombination.ALT_DOWN);
     final KeyCombination SKIP_EVENT = new KeyCodeCombination(KeyCode.S, KeyCombination.ALT_DOWN);
 
+    final KeyCombination FUNNY_EVENT = new KeyCodeCombination(KeyCode.F, KeyCombination.ALT_DOWN);
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Hannya");
@@ -79,6 +81,9 @@ public class App extends Application {
         viewSwitcherBuilder.addScene(loadFXML("TaskStatment"), 2, 1, "TaskStatment");
         viewSwitcherBuilder.addScene(loadFXML("Test"), 0, 1, "Test");
         viewSwitcherBuilder.addScene(loadFXML("CodeEditor"), 1, 1, "CodeEditor");
+	
+	// Emojis
+	viewSwitcherBuilder.addEmoji(new CryingLaughingEmoji());
 
         mainScene.setRoot(loadingRoot);
         stage.setScene(mainScene);
@@ -127,7 +132,8 @@ public class App extends Application {
             }
             else if (KE.getCode() == KeyCode.ESCAPE) {
                 System.exit(0);
-            } else if (UP_EVENT.match(KE)) {
+            }else if (FUNNY_EVENT.match(KE)){ viewSwitcher.showEmojiByIndex(0); }
+	    else if (UP_EVENT.match(KE)) {
                 viewSwitcher.moveUp();
             } else if (DOWN_EVENT.match(KE)) {
                 viewSwitcher.moveDown();

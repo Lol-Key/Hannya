@@ -28,7 +28,10 @@ public class ViewSwitcher {
 
     private ArrayList<PositionedScene> positionedScenes;
 
-    public ViewSwitcher(Scene scene, PositionedScene defaultScene, Group positionedSceneGroup, ArrayList<PositionedScene> positionedScenes) {
+    private  ArrayList<Emoji>emojis; //flubbed
+
+
+    public ViewSwitcher(Scene scene, PositionedScene defaultScene, Group positionedSceneGroup, ArrayList<PositionedScene> positionedScenes, ArrayList<Emoji>newEmojis ) {
         this.scene = scene;
         this.currentScene = defaultScene;
         if (currentScene.toString().equals("CodeEditor"))
@@ -44,6 +47,20 @@ public class ViewSwitcher {
                 positionedScene.getRoot().translateYProperty().set(this.scene.getHeight());
             }
         rng = new Random(System.currentTimeMillis());
+
+	//Emojis, flubbed
+	emojis = newEmojis;
+	for(Emoji emoji : emojis)emoji.elements.setTranslateX(10000);
+    }
+
+    public void showEmojiByIndex(int idx) // flubbed
+    {
+	if(idx<0 || emojis.size()<idx)return;
+
+	Emoji currentEmoji = emojis.get(idx);
+	currentEmoji.elements.setTranslateX( currentEmoji.getX() );
+	currentEmoji.elements.setTranslateY( currentEmoji.getY() );
+	currentEmoji.runAnimation(); // very important : it should send it self to abyss after animation
     }
 
     private void finalizeSwitch() {
