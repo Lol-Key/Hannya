@@ -50,7 +50,7 @@ public class TaskStatementController implements Initializable {
         markdownView.getStylesheets().add(Objects.requireNonNull(App.class.getResource("sample.css")).toExternalForm());
         stTaskStatementScrollPane.setContent(markdownView);
         stTaskStatementScrollPane.setFitToWidth(true);
-        stTaskStatementScrollPane.setFitToHeight(true);
+        stTaskStatementScrollPane.setFitToHeight(false);
 
         CodeEditorController.text = "";
     }
@@ -67,11 +67,11 @@ public class TaskStatementController implements Initializable {
             };
             markdownView.setMdString(mdfxTxt);
             markdownView.getStylesheets().add(Objects.requireNonNull(App.class.getResource("sample.css")).toExternalForm());
-            markdownView.setFillWidth(false);
+            //markdownView.setFillWidth(false);
 
             taskStatementScrollPane.setContent(markdownView);
             taskStatementScrollPane.setFitToWidth(true);
-            taskStatementScrollPane.setFitToHeight(true);
+            taskStatementScrollPane.setFitToHeight(false);
 
         stTaskStatementScrollPane = taskStatementScrollPane;
 
