@@ -1,7 +1,8 @@
-dfakjbfhkdj
-dsfakjhdhfja
-dafkjhdfkjhda
-dsafhkjhsfdk
-ahfsdk
-afhkdshf
-fakjhdhf
+// Your First C++ Program
+
+#include <iostream>
+
+int main() {
+    std::cout << "Hello world";
+    return 0;
+}
