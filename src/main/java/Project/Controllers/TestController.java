@@ -60,7 +60,16 @@ public class TestController implements Initializable {
                 currentLevel.submit = true;
             }
         }
+
         String textFromArea = stcCodeArea.getText();
+        StatController.incrementCharactersTyped(textFromArea.length());
+        int i;
+        for(i = 0; i < textFromArea.length(); i++){
+            if(textFromArea.charAt(i) == '\n'){
+                StatController.incrementLinesOfCode();
+            }
+        }
+
         try{
             TaskTester.runAll(current, textFromArea);
         }catch(GppFactory.GppCompilationException gppExp){
@@ -70,6 +79,7 @@ public class TestController implements Initializable {
             if(currentLevel.isMarked(3)){
                 stcCodeArea.replaceText("");
             }
+            StatController.incrementUnsuccessfulSubmissions();
             return;
         }catch (TaskTester.WrongAnwserException ansExp){
             saveTextToAreas(ansExp);
@@ -77,8 +87,11 @@ public class TestController implements Initializable {
                 stcCodeArea.replaceText("");
             }
             viewSwitcher.showEmojiByIndex(0);
+            StatController.incrementUnsuccessfulSubmissions();
             return;
         }
+        StatController.incrementSuccessfulSubmissions();
+        StatController.incrementSolvedTasks(FileHelper.fileToString(current.getDirectory()));
         stAreaRes.setText("OK");
         stAreaSolv.setText("");
         stAreaTest.setText("");
@@ -111,6 +124,7 @@ public class TestController implements Initializable {
             viewSwitcher.showEmojiByIndex(0);
             return;
         }
+
         stAreaRes.setText("OK");
         stAreaSolv.setText("");
         stAreaTest.setText("");

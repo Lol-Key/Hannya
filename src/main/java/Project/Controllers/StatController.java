@@ -1,5 +1,6 @@
 package Project.Controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -60,6 +61,18 @@ public class StatController implements Initializable {
         lab4.setText(Integer.toString(lab4Value));
         lab5.setText(Integer.toString(lab5Value));
         lab6.setText(Integer.toString(lab6Value));
+        String absolutePath = System.getProperty("user.dir");
+        String fileSeparator = System.getProperty("file.separator");
+        int i = 0;
+        System.out.println("obtaining: " + absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
+        File projDir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
+        File[] candidates = projDir.listFiles();
+        assert candidates != null;
+        for (File candidate : candidates) {
+            if (candidate.isFile()) continue;
+            i++;
+        }
+        StatController.setUnsolvedTasks(i);
     }
 
     public static void incrementSolvedTasks(String dir) {
@@ -92,7 +105,7 @@ public class StatController implements Initializable {
     }
 
     public static void incrementLinesOfCode() {
-        ++ lab6Value;
+        ++lab6Value;
         stclab6.setText(Integer.toString(lab6Value));
     }
 }

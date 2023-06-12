@@ -25,27 +25,27 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lab1" layoutX="431.0" layoutY="84.0" text="Label" />
+                        <Label fx:id="lab1" alignment="CENTER" layoutX="377.0" layoutY="57.0" prefHeight="105.0" prefWidth="181.0" text="0" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="lab2" layoutX="461.0" layoutY="105.0" text="Label" />
+                        <Label fx:id="lab2" alignment="CENTER" layoutX="385.0" layoutY="52.0" prefHeight="105.0" prefWidth="181.0" text="0" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="lab3" layoutX="444.0" layoutY="96.0" text="Label" />
+                        <Label fx:id="lab3" alignment="CENTER" layoutX="381.0" layoutY="50.0" prefHeight="105.0" prefWidth="181.0" text="0" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="lab4" layoutX="454.0" layoutY="89.0" text="Label" />
+                        <Label fx:id="lab4" alignment="CENTER" layoutX="386.0" layoutY="54.0" prefHeight="105.0" prefWidth="170.0" text="0" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="lab5" layoutX="444.0" layoutY="105.0" text="Label" />
+                        <Label fx:id="lab5" alignment="CENTER" layoutX="389.0" layoutY="61.0" prefHeight="105.0" prefWidth="181.0" text="0" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="lab6" layoutX="455.0" layoutY="105.0" text="Label" />
+                        <Label fx:id="lab6" alignment="CENTER" layoutX="391.0" layoutY="68.0" prefHeight="105.0" prefWidth="170.0" text="0" />
                      </children></AnchorPane>
                </children>
                 </GridPane>

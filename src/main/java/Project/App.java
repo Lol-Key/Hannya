@@ -56,6 +56,7 @@ public class App extends Application {
         stage.setTitle("Hannya");
         stage.initStyle(StageStyle.UNDECORATED);
 
+
 //        showTaskRoot.setOnMousePressed(event -> {
 //            xOffset = event.getSceneX();
 //            yOffset = event.getSceneY();
