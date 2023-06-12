@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static Project.App.viewSwitcher;
 import static Project.Controllers.CodeEditorController.stcCodeArea;
 import static Project.Level.currentLevel;
 import static Project.Task.current;
@@ -75,6 +76,7 @@ public class TestController implements Initializable {
             if(currentLevel.isMarked(3)){
                 stcCodeArea.replaceText("");
             }
+            viewSwitcher.showEmojiByIndex(0);
             return;
         }
         stAreaRes.setText("OK");
@@ -106,6 +108,7 @@ public class TestController implements Initializable {
             if(currentLevel.isMarked(3)){
                 stcCodeArea.replaceText("");
             }
+            viewSwitcher.showEmojiByIndex(0);
             return;
         }
         stAreaRes.setText("OK");
