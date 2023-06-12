@@ -86,7 +86,7 @@ public class StatController implements Initializable {
     }
 
     public static void setUnsolvedTasks(int val) {
-        stclab2.setText(Integer.toString(val));
+        lab2Value = val; stclab2.setText(Integer.toString(val));
     }
 
     public static void incrementSuccessfulSubmissions() {
