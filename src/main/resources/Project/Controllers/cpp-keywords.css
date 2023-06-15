@@ -6,9 +6,10 @@
 }
 
 .styled-text-area .lineno {
+    -fx-fill: #FCF0CC;
     -fx-background-color: #001A23;
-    -fx-stroke: #001A23;
-    -fx-font-size: 1pt;
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Roboto Mono', monospace;
 }
 
 .paragraph-text {

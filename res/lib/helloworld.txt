@@ -1,0 +1,12 @@
+hello
+world
+template
+sayonara nadara
+END_OF_TAGS
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World!\n";
+    return 0;
+}

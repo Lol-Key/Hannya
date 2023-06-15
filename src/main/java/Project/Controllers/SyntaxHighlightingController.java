@@ -4,8 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
+import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 
 import java.io.BufferedReader;
@@ -20,9 +20,9 @@ public class SyntaxHighlightingController {
     private boolean suggestionsActive;
 
     @FXML
-    private CodeArea codeArea;
+    private StyleClassedTextArea codeArea;
 
-    SyntaxHighlightingController(CodeArea _codeArea, String text) {
+    SyntaxHighlightingController(StyleClassedTextArea _codeArea, String text) {
         codeArea = _codeArea;
         initialize(text);
     }
@@ -133,11 +133,11 @@ public class SyntaxHighlightingController {
     @FXML
     private void initialize(String text) {
         suggestionsActive = true;
-        codeArea.requestFollowCaret();
         codeArea.getStylesheets().add(Objects.requireNonNull(SyntaxHighlightingController.class.getResource("cpp-keywords.css")).toExternalForm());
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.replaceText(text);
         refreshSyntaxHighlighting(false);
+        codeArea.requestFollowCaret();
         Pattern indentPattern = Pattern.compile("^\\s+");
         codeArea.addEventFilter(KeyEvent.KEY_PRESSED, KE -> {
             if (KE.getCode() == KeyCode.TAB) {
@@ -190,7 +190,7 @@ public class SyntaxHighlightingController {
                     lastComittedPosition = textBuilder.length();
             }
             else if (i <= caretPosition)
-                ++removedBeforeCaretPosition;
+                ++ removedBeforeCaretPosition;
         }
         caretPosition -= removedBeforeCaretPosition;
         if (!viewOnly) {
@@ -255,16 +255,13 @@ public class SyntaxHighlightingController {
         int ptr = 0;
         boolean inGlobalComment = false;
         boolean inString = false;
-        int lastEndl = 0;
         while (ptr < text.length()) {
             int lineStart = ptr;
             int lineEnd = ptr;
             while (lineEnd < text.length() && text.charAt(lineEnd) != '\n')
                 ++lineEnd;
-            if (lineEnd != text.length()) {
-                lastEndl = lineEnd;
+            if (lineEnd != text.length())
                 ++lineEnd;
-            }
             StringBuilder lastString = new StringBuilder();
             boolean inLocalComment = false;
             int lastIntervalEnd = lineStart;
@@ -353,14 +350,12 @@ public class SyntaxHighlightingController {
             }
             ptr = lineEnd;
         }
-        if (caretPosition > lastEndl) {
-            text += '\n';
-            spansBuilder.add(Collections.singleton("normal"), 1);
-        }
         codeArea.replaceText(text);
         codeArea.moveTo(caretPosition);
-        if (text.length() != 0)
+        if (text.length() != 0) {
             codeArea.setStyleSpans(0, spansBuilder.create());
+            codeArea.requestFollowCaret();
+        }
     }
 
     public void disableSuggestions() {

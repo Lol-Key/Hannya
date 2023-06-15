@@ -2,15 +2,15 @@ package Project.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.StyleClassedTextArea;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CodeEditorController implements Initializable {
     @FXML
-    public CodeArea codeArea;
-    public static CodeArea stcCodeArea;
+    public StyleClassedTextArea codeArea;
+    public static StyleClassedTextArea stcCodeArea;
     public static String text = "";
     public static SyntaxHighlightingController syntaxHighlightingController = null;
 
