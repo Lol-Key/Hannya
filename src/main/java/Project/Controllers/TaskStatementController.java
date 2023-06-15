@@ -20,8 +20,6 @@ import static Project.Task.current;
 public class TaskStatementController implements Initializable {
 
     @FXML
-    private VBox anchorRoot;
-    @FXML
     private ScrollPane taskStatementScrollPane;
     public static ScrollPane stTaskStatementScrollPane;
     @FXML

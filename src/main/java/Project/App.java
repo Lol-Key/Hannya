@@ -5,6 +5,7 @@ import Project.Controllers.TestController;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -34,6 +36,8 @@ public class App extends Application {
     double xOffset;
     double yOffset;
     int i = 0;
+    double monitorHeight;
+    double monitorWidth;
 
     public static ViewSwitcher viewSwitcher;
     public static ViewSwitcherBuilder viewSwitcherBuilder;
@@ -56,6 +60,10 @@ public class App extends Application {
         stage.setTitle("Hannya");
         stage.initStyle(StageStyle.UNDECORATED);
 
+        monitorHeight = Screen.getPrimary().getBounds().getHeight();
+        monitorWidth = Screen.getPrimary().getBounds().getWidth();
+
+        stage.setFullScreen(true);
 
 //        showTaskRoot.setOnMousePressed(event -> {
 //            xOffset = event.getSceneX();
@@ -70,15 +78,15 @@ public class App extends Application {
         ImageView imgView = new ImageView(img);
         ImageView imgView2 = new ImageView(img);
         imgView.setBlendMode(BlendMode.MULTIPLY);
-        imgView.setFitWidth(1280);
-        imgView.setFitHeight(720);
-        imgView2.setFitWidth(1280);
-        imgView2.setFitHeight(720);
+        imgView.setFitWidth(monitorWidth);
+        imgView.setFitHeight(monitorHeight);
+        imgView2.setFitWidth(monitorWidth);
+        imgView2.setFitHeight(monitorHeight);
         Group loadingRoot = new Group(imgView2, imgView);
         mainScene = new Scene(loadingRoot);
 
         // Populating scenes (MUST be after scene loaded)
-        viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, loadFXML("Menu"), 1, 0, "Menu");
+        viewSwitcherBuilder = new ViewSwitcherBuilder(mainScene, monitorHeight, monitorWidth, loadFXML("Menu"), 1, 0, "Menu");
         viewSwitcherBuilder.addScene(loadFXML("TaskStatement"), 2, 1, "TaskStatement");
         viewSwitcherBuilder.addScene(loadFXML("Test"), 0, 1, "Test");
         viewSwitcherBuilder.addScene(loadFXML("CodeEditor"), 1, 1, "CodeEditor");
