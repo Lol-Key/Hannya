@@ -2,7 +2,7 @@
 
 #back{
     -fx-background-image: url("stats.jpg");
-    -fx-background-size: cover;
+    -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }

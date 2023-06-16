@@ -1,6 +1,6 @@
 #pane{
     -fx-background-image: url("menu.jpg");
-    -fx-background-size: cover;
+    -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
