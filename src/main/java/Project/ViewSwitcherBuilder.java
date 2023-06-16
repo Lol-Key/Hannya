@@ -8,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class ViewSwitcherBuilder {
@@ -19,7 +18,7 @@ public class ViewSwitcherBuilder {
 
     private ArrayList<PositionedScene> positionedScenes;
 
-    private ArrayList<Emoji> emojis; //flubbed
+    private ArrayList<Emoji> emojis;
 
     private double monitorHeight;
 
@@ -29,40 +28,34 @@ public class ViewSwitcherBuilder {
         this.scene = scene;
         this.monitorHeight = monitorHeight;
         this.monitorWidth = monitorWidth;
-        if (root instanceof GridPane) {
-            GridPane rootPane = (GridPane)root;
-            rootPane.setPrefHeight(monitorHeight);
-            rootPane.setPrefWidth(monitorWidth);
-        }
         defaultScene = new PositionedScene(root, xPosition, yPosition, rootName);
         positionedScenes = new ArrayList<PositionedScene>();
-	    emojis = new ArrayList<Emoji>(); //flubbed
+	    emojis = new ArrayList<Emoji>();
         positionedScenes.add(defaultScene);
     }
 
     public void addScene(Parent root, int xPosition, int yPosition, String rootName) {
-        if (root instanceof GridPane) {
-            GridPane rootPane = (GridPane)root;
-            rootPane.setPrefHeight(monitorHeight);
-            rootPane.setPrefWidth(monitorWidth);
-        }
         positionedScenes.add(new PositionedScene(root, xPosition, yPosition, rootName));
     }
 
-    public void addEmoji(Emoji it) // flubbed
-    {
+    public void addEmoji(Emoji it) {
 	    emojis.add(it);
     }
 
     public ViewSwitcher build() {
         Collection<Node> positionedSceneRoots = new LinkedList<Node>();
-        for (PositionedScene positionedScene : positionedScenes)
+        for (PositionedScene positionedScene : positionedScenes) {
             positionedSceneRoots.add(positionedScene.getRoot());
-	for (Emoji emoji : emojis)
-	    positionedSceneRoots.add(emoji.elements);
+            if (positionedScene.getRoot() instanceof GridPane) {
+                GridPane gridPane = (GridPane)positionedScene.getRoot();
+                gridPane.setPrefHeight(monitorHeight);
+                gridPane.setPrefWidth(monitorWidth);
+            }
+        }
+	    for (Emoji emoji : emojis)
+	        positionedSceneRoots.add(emoji.elements);
         Group positionedSceneGroup = new Group(positionedSceneRoots);
-        System.out.println(positionedSceneGroup.maxWidth(monitorHeight));
-        ViewSwitcher viewSwitcher = new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes , emojis); //flubbed
+        ViewSwitcher viewSwitcher = new ViewSwitcher(scene, defaultScene, positionedSceneGroup, positionedScenes, emojis);
         return viewSwitcher;
     }
 }

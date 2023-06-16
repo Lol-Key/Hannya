@@ -12,7 +12,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.effect.BoxBlur;
 import Project.Controllers.CodeEditorController;
-import javafx.scene.effect.GaussianBlur;
 
 public class ViewSwitcher {
 
@@ -20,7 +19,7 @@ public class ViewSwitcher {
 
     private Scene scene;
 
-    private boolean finalized = true;
+    private boolean switchFinalized = true;
 
     private PositionedScene currentScene;
 
@@ -28,10 +27,10 @@ public class ViewSwitcher {
 
     private ArrayList<PositionedScene> positionedScenes;
 
-    private  ArrayList<Emoji>emojis; //flubbed
+    private  ArrayList<Emoji> emojis;
 
 
-    public ViewSwitcher(Scene scene, PositionedScene defaultScene, Group positionedSceneGroup, ArrayList<PositionedScene> positionedScenes, ArrayList<Emoji>newEmojis ) {
+    public ViewSwitcher(Scene scene, PositionedScene defaultScene, Group positionedSceneGroup, ArrayList<PositionedScene> positionedScenes, ArrayList<Emoji> newEmojis) {
         this.scene = scene;
         this.currentScene = defaultScene;
         if (currentScene.toString().equals("CodeEditor"))
@@ -47,34 +46,30 @@ public class ViewSwitcher {
                 positionedScene.getRoot().translateYProperty().set(this.scene.getHeight());
             }
         rng = new Random(System.currentTimeMillis());
-
-	//Emojis, flubbed
-	emojis = newEmojis;
-	for(Emoji emoji : emojis)emoji.elements.setTranslateX(10000);
+	    emojis = newEmojis;
+	    for(Emoji emoji : emojis)
+            emoji.elements.setTranslateX(this.scene.getWidth() * 3);
     }
 
-    public void showEmojiByIndex(int idx) // flubbed
-    {
-	if(idx<0 || emojis.size()<idx)return;
-
-	Emoji currentEmoji = emojis.get(idx);
-	currentEmoji.elements.setTranslateX( currentEmoji.getX() );
-	currentEmoji.elements.setTranslateY( currentEmoji.getY() );
-	currentEmoji.runAnimation(); // very important : it should send it self to abyss after animation
+    public void showEmojiByIndex(int idx) {
+	    if(idx < 0 || emojis.size() < idx)
+            return;
+	    Emoji currentEmoji = emojis.get(idx);
+	    currentEmoji.elements.setTranslateX(currentEmoji.getX());
+	    currentEmoji.elements.setTranslateY(currentEmoji.getY());
+	    currentEmoji.runAnimation(); // very important : it should send it self to abyss after animation
     }
 
     private void finalizeSwitch() {
-        finalized = true;
+        switchFinalized = true;
     }
 
     private void switchView(PositionedScene newScene, int xChange, int yChange) {
-        if (!finalized)
+        if (!switchFinalized)
             return;
         if (currentScene.toString().equals("CodeEditor"))
             CodeEditorController.stopEditing();
-        finalized = false;
-        System.out.println("Switching scenes : X(" + xChange + ") Y(" + yChange + ")");
-        System.out.println("Going from" + currentScene + " to " + newScene);
+        switchFinalized = false;
         for (PositionedScene positionedScene : positionedScenes)
             if (positionedScene.getRoot() != currentScene.getRoot() &&
                 positionedScene.getRoot() != newScene.getRoot()
@@ -134,7 +129,7 @@ public class ViewSwitcher {
             }
         if (closestSmallerScene != null)
             switchView(closestSmallerScene, 0, 1);
-        /*else if (closestGreaterScene != null)
+        /*else if (closestGreaterScene != null) // uncomment to enable 3d scene switching
             switchView(closestGreaterScene, 0, 1);*/
     }
 
@@ -153,7 +148,7 @@ public class ViewSwitcher {
             }
         if (closestGreaterScene != null)
             switchView(closestGreaterScene, 0, -1);
-        /*else if (closestSmallerScene != null)
+        /*else if (closestSmallerScene != null) // uncomment to enable 3d scene switching
             switchView(closestSmallerScene, 0, -1);*/
     }
 
@@ -172,7 +167,7 @@ public class ViewSwitcher {
             }
         if (closestSmallerScene != null)
             switchView(closestSmallerScene, 1, 0);
-        /*else if (closestGreaterScene != null)
+        /*else if (closestGreaterScene != null) // uncomment to enable 3d scene switching
             switchView(closestGreaterScene, 1, 0);*/
     }
 
@@ -191,7 +186,7 @@ public class ViewSwitcher {
             }
         if (closestGreaterScene != null)
             switchView(closestGreaterScene, -1, 0);
-        /*else if (closestSmallerScene != null)
+        /*else if (closestSmallerScene != null) // uncomment to enable 3d scene switching
             switchView(closestSmallerScene, -1, 0);*/
     }
 

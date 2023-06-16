@@ -312,7 +312,10 @@ public class SyntaxHighlightingController {
                                     ++nextLineChars;
                                 ++nextLineEnd;
                             }
-                            if (suggestionsActive && nextLineChars == 0 && caretPosition >= i + 3 && caretPosition < lineEnd && i + 2 < lineEnd && text.charAt(i + 2) == '/') {
+                            System.out.println("Found comment, maybe suggestion");
+                            System.out.println("i: " + i + " nextLineChars: " + nextLineChars + " caretPosition: " + caretPosition + " lineEnd: " + lineEnd);
+                            if (suggestionsActive && nextLineChars == 0 && caretPosition >= i + 3 && caretPosition <= lineEnd && i + 2 < lineEnd && text.charAt(i + 2) == '/') {
+                                System.out.println("suggestion found");
                                 StringBuilder suggestion = new StringBuilder();
                                 for (int j = i + 3; j < lineEnd; ++j)
                                     if (!Character.isWhitespace(text.charAt(j)))
@@ -323,6 +326,8 @@ public class SyntaxHighlightingController {
                                     suggestedAlgorithm = "Search for an algorithm or data structure" + System.lineSeparator();
                                     suggestionStyle = "fakesuggestion";
                                 }
+                                if (caretPosition == lineEnd)
+                                    suggestedAlgorithm = '\n' + suggestedAlgorithm;
                                 StringBuilder newTextBuilder = new StringBuilder(text);
                                 newTextBuilder.insert(lineEnd, suggestedAlgorithm);
                                 text = newTextBuilder.toString();
