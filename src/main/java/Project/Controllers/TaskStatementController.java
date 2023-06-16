@@ -22,9 +22,6 @@ public class TaskStatementController implements Initializable {
     @FXML
     private ScrollPane taskStatementScrollPane;
     public static ScrollPane stTaskStatementScrollPane;
-    @FXML
-    private Label labelTaskName;
-    public static String error = "";
 
     static String mdfxTxt = "";
 

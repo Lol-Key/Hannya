@@ -22,8 +22,6 @@ import static Project.Task.current;
 
 public class TestController implements Initializable {
     @FXML
-    public VBox anchorRoot;
-    @FXML
     public JFXTextArea areaTest;
     @FXML
     public JFXTextArea areaRes;
@@ -68,6 +66,9 @@ public class TestController implements Initializable {
             if(textFromArea.charAt(i) == '\n'){
                 StatController.incrementLinesOfCode();
             }
+        }
+        if(StatController.labValues[5] == 0 && StatController.labValues[4] !=0){
+            StatController.incrementLinesOfCode();
         }
 
         try{
