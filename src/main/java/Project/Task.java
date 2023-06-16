@@ -1,10 +1,11 @@
 package Project;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class Task {
-    static Random gen = new Random(2137);
     public static Task current = new Task();
 
     private final File dir;
@@ -45,17 +46,15 @@ public class Task {
         File projDir = new File(absolutePath + fileSeparator + "res" + fileSeparator + "tasks" + fileSeparator);
         File[] candidates = projDir.listFiles();
 
-        Task res = new Task();
-        assert candidates != null;
-        int rand = gen.nextInt() % candidates.length;
-        for (File candidate : candidates) {
-            if (candidate.isFile()) continue;
-            if (0 == rand--) continue;
-            res = new Task(candidate);
-            break;
-        }
+	Collections.shuffle(Arrays.asList( candidates ));
 
-        return res;
+        for (File candidate : candidates)
+	{
+		if (candidate.isFile()) continue;
+		return new Task(candidate);	
+	}
+	return new Task();
+
     }
 
     @Override

@@ -10,6 +10,7 @@ Jeżeli zadanie okaże się zbyt wymagające to można je ominąć za pomocą AL
 
 W edytorze gracz może zaciągać kod z gotowej biblioteczki za pomocą trybu zaciągania w który się wchodzi tworząc wydłużony komentarz /// wewnątrz edytora.
 Tryb zaciągania pozwala na wyszukiwanie algorytmów oraz zaciąganie ich za pomocą wciśnięcia TAB.
+Dodatkowo w trybie zaciągania znajduje się przykładowe rozwiązanie zadania Hello world. Gracz może je znaleźć pisząc /// Hello.
 
 Testerka pozwala na przetestowanie rozwiązania przed wysłaniem zgłoszenia (ALT + T) oraz wysyłanie zgłoszeń (ALT + C). Testowane zgłoszenia dają użytkownikowi test na którym jego program się wysypał, out który na nim wypisał oraz poprawny out, aby użytkownik mógł zdebugować rozwiązanie łatwiej. Powiadamiamy gracza o werdykcie za pomocą bardzo starannie dobranych animacji o uniwersalnym przekazie. Dzięki temu projekt łatwo można wzbogacić o nowe języki, bez potrzeby ingerowania w nie (skalowalność).
 
