@@ -1,8 +1,10 @@
-// Your First C++ Program
-
+///hel
 #include <iostream>
+using namespace std;
 
 int main() {
-    std::cout << "Hello world";
+    int n;
+    cin >> n;
+    cout << "Hello World!\n";
     return 0;
-}
+}	
